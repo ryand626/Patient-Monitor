@@ -14,6 +14,18 @@
 		94167A091A0AED2700861407 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94167A081A0AED2700861407 /* Images.xcassets */; };
 		94167A0C1A0AED2700861407 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94167A0A1A0AED2700861407 /* LaunchScreen.xib */; };
 		94167A181A0AED2700861407 /* Patient_MonitorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94167A171A0AED2700861407 /* Patient_MonitorTests.m */; };
+		94167A221A0AF19C00861407 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94167A211A0AF19C00861407 /* placeholder.jpg */; };
+		94167A2B1A0AFBE100861407 /* pulseicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94167A251A0AFBE100861407 /* pulseicon.png */; };
+		94167A2C1A0AFBE100861407 /* SpO2icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94167A271A0AFBE100861407 /* SpO2icon.png */; };
+		94167A2D1A0AFBE100861407 /* thermometericon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94167A291A0AFBE100861407 /* thermometericon.png */; };
+		945D31501A0BD253009712FC /* ekg.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D314F1A0BD253009712FC /* ekg.png */; };
+		945D31521A0BD69E009712FC /* spo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D31511A0BD69E009712FC /* spo2.png */; };
+		945D31541A0BD87F009712FC /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 945D31531A0BD87F009712FC /* black.jpg */; };
+		945D31571A0BDC0D009712FC /* ekgicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D31551A0BDC0D009712FC /* ekgicon.png */; };
+		945D315A1A0BE04A009712FC /* alarmonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D31581A0BE04A009712FC /* alarmonIcon.png */; };
+		945D315D1A0BE4E9009712FC /* celsiusicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D315B1A0BE4E9009712FC /* celsiusicon.png */; };
+		945D315E1A0BE4E9009712FC /* faranheiticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D315C1A0BE4E9009712FC /* faranheiticon.png */; };
+		945D31601A0BE66E009712FC /* settingsicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D315F1A0BE66E009712FC /* settingsicon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +52,19 @@
 		94167A111A0AED2700861407 /* Patient MonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Patient MonitorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94167A161A0AED2700861407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94167A171A0AED2700861407 /* Patient_MonitorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Patient_MonitorTests.m; sourceTree = "<group>"; };
+		94167A211A0AF19C00861407 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
+		94167A241A0AFAB400861407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/pulseicon.psd; sourceTree = "<group>"; };
+		94167A261A0AFBE100861407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/pulseicon.png; sourceTree = "<group>"; };
+		94167A281A0AFBE100861407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/SpO2icon.png; sourceTree = "<group>"; };
+		94167A2A1A0AFBE100861407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/thermometericon.png; sourceTree = "<group>"; };
+		945D314F1A0BD253009712FC /* ekg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ekg.png; sourceTree = "<group>"; };
+		945D31511A0BD69E009712FC /* spo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spo2.png; sourceTree = "<group>"; };
+		945D31531A0BD87F009712FC /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
+		945D31561A0BDC0D009712FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/ekgicon.png; sourceTree = "<group>"; };
+		945D31591A0BE04A009712FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/alarmonIcon.png; sourceTree = "<group>"; };
+		945D315B1A0BE4E9009712FC /* celsiusicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = celsiusicon.png; sourceTree = "<group>"; };
+		945D315C1A0BE4E9009712FC /* faranheiticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faranheiticon.png; sourceTree = "<group>"; };
+		945D315F1A0BE66E009712FC /* settingsicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsicon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +121,19 @@
 		941679FB1A0AED2700861407 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				945D315F1A0BE66E009712FC /* settingsicon.png */,
+				945D315B1A0BE4E9009712FC /* celsiusicon.png */,
+				945D315C1A0BE4E9009712FC /* faranheiticon.png */,
+				945D31581A0BE04A009712FC /* alarmonIcon.png */,
+				945D31551A0BDC0D009712FC /* ekgicon.png */,
+				945D31531A0BD87F009712FC /* black.jpg */,
+				945D31511A0BD69E009712FC /* spo2.png */,
+				945D314F1A0BD253009712FC /* ekg.png */,
+				94167A251A0AFBE100861407 /* pulseicon.png */,
+				94167A271A0AFBE100861407 /* SpO2icon.png */,
+				94167A291A0AFBE100861407 /* thermometericon.png */,
+				94167A211A0AF19C00861407 /* placeholder.jpg */,
+				94167A231A0AFAB400861407 /* pulseicon.psd */,
 				941679FC1A0AED2700861407 /* Info.plist */,
 				941679FD1A0AED2700861407 /* main.m */,
 			);
@@ -199,9 +237,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94167A2B1A0AFBE100861407 /* pulseicon.png in Resources */,
+				945D31501A0BD253009712FC /* ekg.png in Resources */,
+				945D31521A0BD69E009712FC /* spo2.png in Resources */,
 				94167A071A0AED2700861407 /* Main.storyboard in Resources */,
+				94167A2D1A0AFBE100861407 /* thermometericon.png in Resources */,
+				945D315A1A0BE04A009712FC /* alarmonIcon.png in Resources */,
+				94167A2C1A0AFBE100861407 /* SpO2icon.png in Resources */,
+				945D31571A0BDC0D009712FC /* ekgicon.png in Resources */,
+				94167A221A0AF19C00861407 /* placeholder.jpg in Resources */,
+				945D315E1A0BE4E9009712FC /* faranheiticon.png in Resources */,
+				945D31601A0BE66E009712FC /* settingsicon.png in Resources */,
+				945D315D1A0BE4E9009712FC /* celsiusicon.png in Resources */,
 				94167A0C1A0AED2700861407 /* LaunchScreen.xib in Resources */,
 				94167A091A0AED2700861407 /* Images.xcassets in Resources */,
+				945D31541A0BD87F009712FC /* black.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +308,54 @@
 				94167A0B1A0AED2700861407 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		94167A231A0AFAB400861407 /* pulseicon.psd */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94167A241A0AFAB400861407 /* Base */,
+			);
+			name = pulseicon.psd;
+			sourceTree = "<group>";
+		};
+		94167A251A0AFBE100861407 /* pulseicon.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94167A261A0AFBE100861407 /* Base */,
+			);
+			name = pulseicon.png;
+			sourceTree = "<group>";
+		};
+		94167A271A0AFBE100861407 /* SpO2icon.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94167A281A0AFBE100861407 /* Base */,
+			);
+			name = SpO2icon.png;
+			sourceTree = "<group>";
+		};
+		94167A291A0AFBE100861407 /* thermometericon.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94167A2A1A0AFBE100861407 /* Base */,
+			);
+			name = thermometericon.png;
+			sourceTree = "<group>";
+		};
+		945D31551A0BDC0D009712FC /* ekgicon.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				945D31561A0BDC0D009712FC /* Base */,
+			);
+			name = ekgicon.png;
+			sourceTree = "<group>";
+		};
+		945D31581A0BE04A009712FC /* alarmonIcon.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				945D31591A0BE04A009712FC /* Base */,
+			);
+			name = alarmonIcon.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -414,6 +512,7 @@
 				94167A1D1A0AED2800861407 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		94167A1E1A0AED2800861407 /* Build configuration list for PBXNativeTarget "Patient MonitorTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +521,7 @@
 				94167A201A0AED2800861407 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

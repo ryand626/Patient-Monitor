@@ -1,25 +1,363 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="5vX-uH-KRC">
+                                <rect key="frame" x="0.0" y="586" width="1024" height="182"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzf-LT-SdW">
+                                <rect key="frame" x="908" y="48" width="100" height="100"/>
+                                <state key="normal" title="Button" image="SpO2icon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="gOQ-Qm-TxE" kind="show" id="yFF-iq-eyJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qX0-xC-TCU">
+                                <rect key="frame" x="908" y="433" width="100" height="100"/>
+                                <state key="normal" title="Button" image="thermometericon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="P6w-TR-oBh" kind="show" id="zLD-IH-Lal"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k64-5X-b2A">
+                                <rect key="frame" x="908" y="237" width="100" height="100"/>
+                                <state key="normal" title="Button" image="pulseicon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9FG-P9-RpP" kind="show" id="Ty4-t7-jSJ"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alarmonIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="3mk-xE-SdT">
+                                <rect key="frame" x="129" y="598" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="faranheiticon.png" translatesAutoresizingMaskIntoConstraints="NO" id="KJW-y3-knb">
+                                <rect key="frame" x="420" y="598" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settingsicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="kMt-nC-TTj">
+                                <rect key="frame" x="746" y="598" width="150" height="150"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="48" y="133"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QVG-or-zbm">
+            <objects>
+                <viewController id="gOQ-Qm-TxE" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5M6-7p-f4C"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dzo-tj-mO6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SSF-te-bKB">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="aeH-DC-7DZ">
+                                <rect key="frame" x="0.0" y="584" width="1024" height="184"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NhM-9c-MN3">
+                                <rect key="frame" x="732" y="196" width="291" height="194"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-28-H20">
+                                <rect key="frame" x="732" y="391" width="291" height="191"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="66 BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npr-RX-xUA">
+                                <rect key="frame" x="746" y="247" width="160" height="79"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <color key="textColor" red="0.57254904510000004" green="0.91764712329999998" blue="0.6549019814" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZD-GJ-LaI">
+                                <rect key="frame" x="908" y="437" width="100" height="100"/>
+                                <state key="normal" title="Button" image="thermometericon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="P6w-TR-oBh" kind="show" id="VQd-7p-vff"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1u-Df-rVQ">
+                                <rect key="frame" x="908" y="240" width="100" height="100"/>
+                                <state key="normal" title="Button" image="pulseicon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9FG-P9-RpP" kind="show" id="rwD-zp-YZ2"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="luF-Ro-pGM">
+                                <rect key="frame" x="0.0" y="0.0" width="730" height="582"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ekg.png" translatesAutoresizingMaskIntoConstraints="NO" id="SdA-IL-Pmw">
+                                <rect key="frame" x="732" y="0.0" width="291" height="194"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="98.5 °F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLp-85-huj">
+                                <rect key="frame" x="767" y="428" width="149" height="93"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L87-qm-luG">
+                                <rect key="frame" x="908" y="42" width="100" height="101"/>
+                                <state key="normal" title="Button" image="ekgicon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="8wG-Du-oh9"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SpO2icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="FJH-5T-tn4">
+                                <rect key="frame" x="569" y="18" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="faranheiticon.png" translatesAutoresizingMaskIntoConstraints="NO" id="CjI-5h-nw4">
+                                <rect key="frame" x="428" y="598" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settingsicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="hbK-9V-Axn">
+                                <rect key="frame" x="770" y="598" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alarmonIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="F0T-u0-oBZ">
+                                <rect key="frame" x="104" y="598" width="150" height="150"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GDS-tr-m2S" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1270" y="1101"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="aNf-wp-RF1">
+            <objects>
+                <viewController id="9FG-P9-RpP" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Yi-43-0vx"/>
+                        <viewControllerLayoutGuide type="bottom" id="brs-gx-2pZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GhG-Bx-Fb0">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="B4q-4y-avj">
+                                <rect key="frame" x="0.0" y="587" width="1024" height="181"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="jhf-1X-jmt">
+                                <rect key="frame" x="735" y="394" width="287" height="192"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RHC-Xb-3Ty">
+                                <rect key="frame" x="0.0" y="-5" width="734" height="591"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="QGk-Zj-KEB">
+                                <rect key="frame" x="735" y="0.0" width="289" height="195"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ekg.png" translatesAutoresizingMaskIntoConstraints="NO" id="igg-Qv-CT0">
+                                <rect key="frame" x="735" y="196" width="289" height="197"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jrj-mZ-srH">
+                                <rect key="frame" x="908" y="48" width="100" height="100"/>
+                                <state key="normal" title="Button" image="SpO2icon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="gOQ-Qm-TxE" kind="show" id="hIB-7i-IGR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IB8-0V-FwK">
+                                <rect key="frame" x="908" y="428" width="100" height="100"/>
+                                <state key="normal" title="Button" image="thermometericon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="P6w-TR-oBh" kind="show" id="1sX-pc-8Fs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7po-VF-w7c">
+                                <rect key="frame" x="908" y="234" width="100" height="100"/>
+                                <state key="normal" title="Button" image="ekgicon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="kwK-Q8-bDw"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="96 %" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byL-LD-aM7">
+                                <rect key="frame" x="774" y="68" width="108" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="66 BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOh-1p-O73">
+                                <rect key="frame" x="56" y="134" width="559" height="337"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="152"/>
+                                <color key="textColor" red="0.57254904510000004" green="0.91764712329999998" blue="0.6549019814" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="98.5 °F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAq-SS-FnT">
+                                <rect key="frame" x="762" y="431" width="149" height="93"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pulseicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hii-K8-8yf">
+                                <rect key="frame" x="574" y="31" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="faranheiticon.png" translatesAutoresizingMaskIntoConstraints="NO" id="5xa-X1-6CC">
+                                <rect key="frame" x="428" y="598" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settingsicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="08d-7N-h2L">
+                                <rect key="frame" x="770" y="598" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alarmonIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="VFw-bH-rtU">
+                                <rect key="frame" x="104" y="598" width="150" height="150"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y9B-JK-BCj" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1270" y="169"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="suL-ne-mrg">
+            <objects>
+                <viewController id="P6w-TR-oBh" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jfQ-yK-Yva"/>
+                        <viewControllerLayoutGuide type="bottom" id="8S2-UD-qls"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yeS-1u-A4w">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="nSb-Ua-hDQ">
+                                <rect key="frame" x="0.0" y="589" width="1024" height="179"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="2i8-2z-3Or">
+                                <rect key="frame" x="732" y="0.0" width="292" height="194"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2rZ-4z-cjK">
+                                <rect key="frame" x="-4" y="0.0" width="734" height="587"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="98.5 °F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wh3-EG-7Tm">
+                                <rect key="frame" x="84" y="143" width="559" height="337"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="152"/>
+                                <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="thermometericon.png" translatesAutoresizingMaskIntoConstraints="NO" id="H3z-Sr-Ojl">
+                                <rect key="frame" x="574" y="20" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="pbD-ZB-THU">
+                                <rect key="frame" x="732" y="196" width="291" height="194"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ekg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sgy-Me-Cwk">
+                                <rect key="frame" x="732" y="391" width="292" height="196"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="66 BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSp-cV-Vs5">
+                                <rect key="frame" x="746" y="247" width="160" height="79"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdq-u7-LMP">
+                                <rect key="frame" x="908" y="439" width="100" height="100"/>
+                                <state key="normal" title="Button" image="ekgicon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="Wzh-5O-ok1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4t-pw-q14">
+                                <rect key="frame" x="908" y="243" width="100" height="100"/>
+                                <state key="normal" title="Button" image="pulseicon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9FG-P9-RpP" kind="show" id="KWc-n2-Gav"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vk-4j-9cS">
+                                <rect key="frame" x="908" y="48" width="100" height="100"/>
+                                <state key="normal" title="Button" image="SpO2icon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="gOQ-Qm-TxE" kind="show" id="rPa-fv-Jhx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="96 %" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOZ-5L-c3i">
+                                <rect key="frame" x="772" y="66" width="108" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="faranheiticon.png" translatesAutoresizingMaskIntoConstraints="NO" id="t5p-n4-JEm">
+                                <rect key="frame" x="428" y="598" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settingsicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="7kg-KO-yXW">
+                                <rect key="frame" x="770" y="598" width="150" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alarmonIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ilw-Y3-EwA">
+                                <rect key="frame" x="104" y="598" width="150" height="150"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rm9-dP-Ocd" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="146" y="1051"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SpO2icon.png" width="294" height="294"/>
+        <image name="alarmonIcon.png" width="294" height="294"/>
+        <image name="black.jpg" width="960" height="400"/>
+        <image name="ekg.png" width="714" height="435"/>
+        <image name="ekgicon.png" width="294" height="294"/>
+        <image name="faranheiticon.png" width="294" height="294"/>
+        <image name="pulseicon.png" width="294" height="294"/>
+        <image name="settingsicon.png" width="294" height="294"/>
+        <image name="spo2.png" width="665" height="208"/>
+        <image name="thermometericon.png" width="294" height="294"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Wzh-5O-ok1"/>
+        <segue reference="zLD-IH-Lal"/>
+        <segue reference="Ty4-t7-jSJ"/>
+        <segue reference="yFF-iq-eyJ"/>
+    </inferredMetricsTieBreakers>
 </document>
