@@ -13,11 +13,15 @@
     UIWindow *window;
     int number_of_side_doopies;
     int number_of_main_view_breaks;
+    
+    float button_width;
+    float button_height;
 
     // ==========Boxes for view Layouts=========
 
     // Main view properties (whole screen or 2/3)
     UIView *main_view;
+    UIButton *main_button;
     float main_view_x;
     float main_view_y;
     float main_view_width;
@@ -25,17 +29,20 @@
 
     // Lower options bar properties
     UIView *bottom_bar;
+    UIButton *layout;
+    int layout_index;
     float bottom_bar_x;
     float bottom_bar_y;
     float bottom_bar_width;
     float bottom_bar_height;
+    
 
     // Right Sidebar properties
-    UIView *hilight_view;
-    float hilight_view_x;
-    float hilight_view_y;
-    float hilight_view_width;
-    float hilight_view_height;
+    UIView *side_view;
+    float side_view_x;
+    float side_view_y;
+    float side_view_width;
+    float side_view_height;
 
     // ============BOXES FOR GRAPHS=============
     // EKG properties

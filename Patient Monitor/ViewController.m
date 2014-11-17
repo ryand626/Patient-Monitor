@@ -15,6 +15,8 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
+
+    
     [super viewDidLoad];
 
     [self initialize_dimentions];
@@ -37,6 +39,9 @@
     number_of_side_doopies = 3;
     // Number of breaks in the main view
     number_of_main_view_breaks = 0;
+    // Buttons
+    button_width = 100;
+    button_height = 100;
     
     // Get window data
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -54,10 +59,10 @@
     bottom_bar_height = window.frame.size.height*(1-lower_bar_scale);
     
     // Set Side Bar Bounds
-    hilight_view_x = window.frame.size.width*right_bar_scale;
-    hilight_view_y = 0;
-    hilight_view_width = window.frame.size.width*(1-right_bar_scale);
-    hilight_view_height = window.frame.size.height*lower_bar_scale;
+    side_view_x = window.frame.size.width*right_bar_scale;
+    side_view_y = 0;
+    side_view_width = window.frame.size.width*(1-right_bar_scale);
+    side_view_height = window.frame.size.height*lower_bar_scale;
 }
 
 // Create the bounds where elements will be drawn
@@ -66,13 +71,11 @@
     [main_view setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:main_view];
     
-    hilight_view = [[UIView alloc] initWithFrame:CGRectMake(hilight_view_x, hilight_view_y, hilight_view_width, hilight_view_height)];
-    [hilight_view setBackgroundColor:[UIColor blueColor]];
-    [self.view addSubview:hilight_view];
+    side_view = [[UIView alloc] initWithFrame:CGRectMake(side_view_x, side_view_y, side_view_width, side_view_height)];
+    [side_view setBackgroundColor:[UIColor blueColor]];
+    [self.view addSubview:side_view];
     
-    bottom_bar = [[UIView alloc] initWithFrame:CGRectMake(bottom_bar_x, bottom_bar_y, bottom_bar_width, bottom_bar_height)];
-    [bottom_bar setBackgroundColor:[UIColor grayColor]];
-    [self.view addSubview:bottom_bar];
+    [self makeBottomBar];
     
     [self updateEKG];
     [self updateSPO2];
@@ -89,6 +92,21 @@
     [self.view addSubview:PULSE_Button];
     [self.view addSubview:TEMPERATURE_Button];
 }
+-(void)makeBottomBar{
+    layout_index = 0;
+    
+    bottom_bar = [[UIView alloc] initWithFrame:CGRectMake(bottom_bar_x, bottom_bar_y, bottom_bar_width, bottom_bar_height)];
+    [bottom_bar setBackgroundColor:[UIColor grayColor]];
+    [self.view addSubview:bottom_bar];
+    
+    // Add a layout button
+    layout = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width/2-button_width/2, bottom_bar_height/2-button_height/2, button_width, button_height)];
+    [layout setBackgroundColor:[UIColor whiteColor]];
+    [layout addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [bottom_bar addSubview:layout];
+    
+    
+}
 
 -(void)updateEKG{
     float x = main_view_x;
@@ -100,46 +118,124 @@
     [EKG setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"ekg.png"]]];
     
     EKG_Button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 100, 100)];
+    [EKG_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [EKG_Button setBackgroundImage:[UIImage imageNamed:@"ekgicon.png" ] forState:UIControlStateNormal];
+
+    main_view = EKG;
+    main_button = EKG_Button;
 }
 
 -(void)updateSPO2{
-    float x = hilight_view_x;
-    float y = hilight_view_y;
-    float width = hilight_view_width;
-    float height = hilight_view_height/number_of_side_doopies;
+    float x = side_view_x;
+    float y = side_view_y;
+    float width = side_view_width;
+    float height = side_view_height/number_of_side_doopies;
     
     SPO2 = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     [SPO2 setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"spo2.png"]]];
     
     SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 100, 100)];
+    [SPO2_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [SPO2_Button setBackgroundImage:[UIImage imageNamed:@"SpO2icon.png"] forState:UIControlStateNormal];
+    
+    
 }
 
 -(void)updatePULSE{
-    float x = hilight_view_x;
-    float y = hilight_view_y+hilight_view_height/number_of_side_doopies;
-    float width = hilight_view_width;
-    float height = hilight_view_height/number_of_side_doopies;
+    float x = side_view_x;
+    float y = side_view_y+side_view_height/number_of_side_doopies;
+    float width = side_view_width;
+    float height = side_view_height/number_of_side_doopies;
     
     PULSE = [[UIView alloc] initWithFrame:CGRectMake(x, y, width,height)];
     [PULSE setBackgroundColor:[UIColor magentaColor]];
     
     PULSE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 100, 100)];
+    [PULSE_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [PULSE_Button setBackgroundImage:[UIImage imageNamed:@"pulseicon.png"] forState:UIControlStateNormal];
 }
 
 -(void)updateTEMPERATURE{
-    float x = hilight_view_x;
-    float y = hilight_view_y+2*hilight_view_height/number_of_side_doopies;
-    float width = hilight_view_width;
-    float height = hilight_view_height/number_of_side_doopies;
+    float x = side_view_x;
+    float y = side_view_y+2*side_view_height/number_of_side_doopies;
+    float width = side_view_width;
+    float height = side_view_height/number_of_side_doopies;
     
     TEMPERATURE = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     [TEMPERATURE setBackgroundColor:[UIColor redColor]];
     
     TEMPERATURE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 100, 100)];
+    [TEMPERATURE_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [TEMPERATURE_Button setBackgroundImage:[UIImage imageNamed:@"thermometericon.png"] forState:UIControlStateNormal];
+}
+// TODO: Make this better by using the number of children of the view in a for loop to condense the code
+-(void) buttonClicked:(UIButton*)sender
+{
+     CGRect temp = main_view.frame;
+    //UIView *tempButton = main_button;
+    
+    if(sender == EKG_Button){
+        if(main_view != EKG){
+            [main_view setFrame:EKG.frame];
+            [main_button setFrame:EKG_Button.frame];
+            
+            [EKG setFrame:temp];
+            [EKG_Button setFrame:CGRectMake(0, 0, 0, 0)];
+            
+            main_view = EKG;
+            main_button = EKG_Button;
+        }
+    }
+    if(sender == SPO2_Button){
+        if(main_view != SPO2){
+            [main_view setFrame:SPO2.frame];
+            [main_button setFrame:SPO2_Button.frame];
+        
+            [SPO2 setFrame:temp];
+            [SPO2_Button setFrame:CGRectMake(0, 0, 0, 0)];
+            
+            main_view = SPO2;
+            main_button = SPO2_Button;
+        }
+    }
+    if(sender == PULSE_Button){
+        if(main_view != PULSE){
+            [main_view setFrame:PULSE.frame];
+            [main_button setFrame:PULSE_Button.frame];
+            
+            [PULSE setFrame:temp];
+            [PULSE_Button setFrame:CGRectMake(0, 0, 0, 0)];
+
+            main_view = PULSE;
+            main_button = PULSE_Button;
+        }
+    }
+    if(sender == TEMPERATURE_Button){
+        if(main_view != TEMPERATURE){
+            [main_view setFrame:TEMPERATURE.frame];
+            [main_button setFrame:TEMPERATURE_Button.frame];
+            
+            [TEMPERATURE setFrame:temp];
+            [TEMPERATURE_Button setFrame:CGRectMake(0, 0, 0, 0)];
+            
+            main_view = TEMPERATURE;
+            main_button = TEMPERATURE_Button;
+        }
+    }
+    if(sender == layout){
+        layout_index = (layout_index+1)%2;
+        if(layout_index == 0){
+            NSLog(@"Switching to default view");
+            [main_view setFrame:CGRectMake(main_view_x, main_view_y, main_view_width, main_view_height)];
+        }else if (layout_index == 1){
+            [main_view setFrame:CGRectMake(main_view_x, main_view_y, window.frame.size.width, main_view_height)];
+            NSLog(@"Switching to large view");
+        }else if (layout_index == 2){
+            NSLog(@"Switching to quadrant view");
+        }else{
+            NSLog(@"ERROR");
+        }
+    }
 }
 
 @end
