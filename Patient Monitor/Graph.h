@@ -12,7 +12,10 @@
 
 @property (nonatomic, strong) NSMutableArray *graphXData;
 @property (nonatomic, strong) NSMutableArray *graphYData;
+@property (nonatomic, strong) UIColor *dataColor;
 
 - (void) printArray;
+- (void) resize;
+- (void)setGraphColor:(UIColor*)myColor WithShapeColor:(UIColor*)shapeColor;
 
 @end

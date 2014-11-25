@@ -18,8 +18,9 @@
     [super viewDidLoad];
 
     [self initialize_dimentions];
-    [self addDefaultViews];
+    [self addDefaultViews];    
     [self initializeGraphs];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,13 +73,15 @@
     
     [EKG_Graph.graphXData addObjectsFromArray:[graphData getDataX]];
     [EKG_Graph.graphYData addObjectsFromArray:[graphData getDataY]];
-   // [EKG addSubview:EKG_Graph];
+    [self.view addSubview:EKG_Graph];
+    [EKG_Graph setGraphColor:[UIColor blackColor] WithShapeColor:[UIColor orangeColor]];
     
     [SPO2_Graph.graphXData addObjectsFromArray:[graphData getDataX]];
     [SPO2_Graph.graphYData addObjectsFromArray:[graphData getDataY]];
-    [SPO2 addSubview:SPO2_Graph];
+    [self.view addSubview:SPO2_Graph];
+    [SPO2_Graph setGraphColor:[UIColor blackColor] WithShapeColor:[UIColor blueColor]];
     
-    main_graph = EKG_Graph.viewForBaselineLayout;
+    main_graph = EKG_Graph;
 }
 
 // Create the bounds where elements will be drawn
@@ -123,12 +126,11 @@
     [bottom_bar addSubview:layout];
     
     // Add Text to the layout button
-    UILabel *flavortext = [[UILabel alloc] initWithFrame:CGRectMake(bottom_bar_x+300, bottom_bar_y,300,bottom_bar_height)];
-    [flavortext setText:@"Change Layout:"];
-    [flavortext setTextColor: [UIColor whiteColor]];
-    //[flavortext setBackgroundColor:[UIColor grayColor]];
-    [self.view addSubview:flavortext];
-    [self.view bringSubviewToFront:flavortext];
+    UILabel *layoutText = [[UILabel alloc] initWithFrame:CGRectMake(bottom_bar_x+300, bottom_bar_y,300,bottom_bar_height)];
+    [layoutText setText:@"Change Layout:"];
+    [layoutText setTextColor: [UIColor whiteColor]];
+    [self.view addSubview:layoutText];
+    [self.view bringSubviewToFront:layoutText];
     
 }
 
@@ -139,7 +141,7 @@
     float height = main_view_height;
     
     EKG = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    [EKG setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"ekg.png"]]];
+    //[EKG setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"ekg.png"]]];
     
     EKG_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [EKG_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -156,7 +158,7 @@
     float height = side_view_height/number_of_side_doopies;
     
     SPO2 = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    [SPO2 setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"spo2.png"]]];
+   // [SPO2 setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"spo2.png"]]];
     
     SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [SPO2_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -193,8 +195,8 @@
 // TODO: Make this better by using the number of children of the view in a for loop to condense the code
 -(void) buttonClicked:(UIButton*)sender
 {
-    CGRect temp = main_view.frame;
-    CGRect tempGraph = main_graph.frame;
+    CGRect tempFrame = main_view.frame;
+    Graph *tempGraph = main_graph;
     //UIView *tempButton = main_button;
     [self.view sendSubviewToBack: main_view];
     if(sender == EKG_Button){
@@ -202,14 +204,17 @@
             
             [main_view setFrame:EKG.frame];
             [main_button setFrame:EKG_Button.frame];
+            [main_graph setFrame:EKG.frame];
+            [main_graph resize];
             
-            [EKG setFrame:temp];
+            [EKG setFrame:tempFrame];
             [EKG_Button setFrame:CGRectMake(0, 0, 0, 0)];
-            [EKG_Graph setFrame:tempGraph];
+            [EKG_Graph setFrame:EKG.frame];
             
             main_view = EKG;
             main_button = EKG_Button;
             main_graph = EKG_Graph;
+            [EKG_Graph resize];
             
         }
     }
@@ -217,39 +222,47 @@
         if(main_view != SPO2){
             [main_view setFrame:SPO2.frame];
             [main_button setFrame:SPO2_Button.frame];
-            [main_graph setFrame:SPO2_Graph.frame];
+            [main_graph setFrame:SPO2.frame];
+            [main_graph resize];
             
-            [SPO2 setFrame:temp];
+            [SPO2 setFrame:tempFrame];
             [SPO2_Button setFrame:CGRectMake(0, 0, 0, 0)];
-            [SPO2_Graph setFrame:tempGraph];
+            [SPO2_Graph setFrame:SPO2.frame];
 
             main_view = SPO2;
             main_button = SPO2_Button;
             main_graph = SPO2_Graph;
+            [SPO2_Graph resize];
         }
     }
     if(sender == PULSE_Button){
         if(main_view != PULSE){
             [main_view setFrame:PULSE.frame];
             [main_button setFrame:PULSE_Button.frame];
+            [main_graph setFrame:PULSE.frame];
+            [main_graph resize];
             
-            [PULSE setFrame:temp];
+            [PULSE setFrame:tempFrame];
             [PULSE_Button setFrame:CGRectMake(0, 0, 0, 0)];
 
             main_view = PULSE;
             main_button = PULSE_Button;
+            main_graph = nil;
         }
     }
     if(sender == TEMPERATURE_Button){
         if(main_view != TEMPERATURE){
             [main_view setFrame:TEMPERATURE.frame];
             [main_button setFrame:TEMPERATURE_Button.frame];
+            [main_graph setFrame:TEMPERATURE.frame];
+            [main_graph resize];
             
-            [TEMPERATURE setFrame:temp];
+            [TEMPERATURE setFrame:tempFrame];
             [TEMPERATURE_Button setFrame:CGRectMake(0, 0, 0, 0)];
             
             main_view = TEMPERATURE;
             main_button = TEMPERATURE_Button;
+            main_graph = nil;
         }
     }
     if(sender == layout){
@@ -265,19 +278,19 @@
         }else{
             NSLog(@"ERROR");
         }
+        [self.view bringSubviewToFront:main_graph];
+        [main_graph setFrame:main_view.frame];
+        [main_graph resize];
     }
     
     [self.view bringSubviewToFront:main_view];
-    
-    [self.view bringSubviewToFront:SPO2_Graph];
+    [self.view bringSubviewToFront:main_graph];
     
     [self.view bringSubviewToFront:EKG_Button];
     [self.view bringSubviewToFront:SPO2_Button];
     [self.view bringSubviewToFront:PULSE_Button];
     [self.view bringSubviewToFront:TEMPERATURE_Button];
-   // [self.view sendSubviewToBack:side_view];
-    
-    //[self.view bringSubviewToFront:graph];
+
 }
 
 @end

@@ -28,7 +28,7 @@
     // Main view properties (whole screen or 2/3)
     UIView *main_view;
     UIButton *main_button;
-    UIView *main_graph;
+    Graph *main_graph;
     float main_view_x;
     float main_view_y;
     float main_view_width;
