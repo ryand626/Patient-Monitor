@@ -21,12 +21,45 @@
     [self addDefaultViews];    
     [self initializeGraphs];
     [self.view bringSubviewToFront:SPO2_Button];
+    [self makeAlarmWindow];
 
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) makeAlarmWindow{
+    float window_width = 400;
+    float window_height = 400;
+    float frame_height = 100;
+    
+    // Create the window frame
+    alarmWindow = [[UIView alloc]initWithFrame:CGRectMake(window.frame.size.width/2-window_width/2, main_view_height/2-window_height/2, window_width, window_height)];
+    [alarmWindow setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:alarmWindow];
+    
+    // Create Menu Bar
+    alarmText = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, alarmWindow.frame.size.width, frame_height)];
+    
+    // Change settings of menu bar
+    [alarmText setTextAlignment:NSTextAlignmentCenter];
+    [alarmText setText:@"Alarm Settings"];
+    [alarmText setBackgroundColor:[UIColor lightGrayColor]];
+    [alarmText setFont:[alarmText.font fontWithSize:32]];
+    // Add menu bar to view
+    [alarmWindow addSubview:alarmText];
+    
+    // Create List Scrollable options List
+    alarmOptionsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, frame_height, window_width, window_height-frame_height)];
+    [alarmWindow addSubview:alarmOptionsTable];
+    
+    
+    // Set up display toggle in options bar
+    isWindowUp = false;
+    [self.view sendSubviewToBack:alarmWindow];
+    
 }
 
 // Set the dimentions of the frames when the view first loads
@@ -132,6 +165,12 @@
     [layoutText setTextColor: [UIColor whiteColor]];
     [self.view addSubview:layoutText];
     [self.view bringSubviewToFront:layoutText];
+    
+    // Make alarm options button
+    alarmOptions = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width/2-button_width/2+button_width*2, bottom_bar_height/2-button_height/2, button_width, button_height)];
+    [alarmOptions addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [alarmOptions setBackgroundImage:[UIImage imageNamed:@"settingsicon.png" ] forState:UIControlStateNormal];
+    [bottom_bar addSubview:alarmOptions];
     
 }
 
@@ -283,6 +322,8 @@
         [main_graph resize];
     }
     
+
+    
     [self.view bringSubviewToFront:main_view];
     [self.view bringSubviewToFront:main_graph];
     [self.view bringSubviewToFront:main_button];
@@ -291,6 +332,15 @@
     [self.view bringSubviewToFront:SPO2_Button];
     [self.view bringSubviewToFront:PULSE_Button];
     [self.view bringSubviewToFront:TEMPERATURE_Button];
+    
+    if(sender == alarmOptions){
+        if(!isWindowUp){
+            [self.view bringSubviewToFront:alarmWindow];
+        }else{
+            [self.view sendSubviewToBack:alarmWindow];
+        }
+        isWindowUp = !isWindowUp;
+    }
 
 }
 

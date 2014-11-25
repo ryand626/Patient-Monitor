@@ -37,12 +37,19 @@
     // Lower options bar properties
     UIView *bottom_bar;
     UIButton *layout;
+    UIButton *alarmOptions;
     int layout_index;
     float bottom_bar_x;
     float bottom_bar_y;
     float bottom_bar_width;
     float bottom_bar_height;
     
+    // Alarm Properties
+    UIView *alarmWindow;
+    UILabel *alarmText;
+    bool isWindowUp;
+    UIScrollView *alarmScroll;
+    UITableView *alarmOptionsTable;
 
     // Right Sidebar properties
     UIView *side_view;
