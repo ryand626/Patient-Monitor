@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Graph.h"
+#import "TheData.h"
+
+//#import <CorePlot/CorePlot.h>
 
 @interface ViewController : UIViewController{
-
+    Graph *graph;
+    TheData *graphData;
+    
     UIWindow *window;
     int number_of_side_doopies;
     int number_of_main_view_breaks;
@@ -22,6 +28,7 @@
     // Main view properties (whole screen or 2/3)
     UIView *main_view;
     UIButton *main_button;
+    UIView *main_graph;
     float main_view_x;
     float main_view_y;
     float main_view_width;
@@ -48,18 +55,24 @@
     // EKG properties
     UIView *EKG;
     UIButton *EKG_Button;
+    UILabel *EKG_Label;
+    Graph *EKG_Graph;
 
     // Right Sidebar properties
     UIView *SPO2;
     UIButton *SPO2_Button;
+    UILabel *SPO2_Label;
+    Graph *SPO2_Graph;
 
     // Right Sidebar properties
     UIView *PULSE;
     UIButton *PULSE_Button;
-
+    UILabel * PULSE_Label;
+    
     // Right Sidebar properties
     UIView *TEMPERATURE;
     UIButton *TEMPERATURE_Button;
+    UILabel * TEMPERATURE_Label;
 }
 @end
 

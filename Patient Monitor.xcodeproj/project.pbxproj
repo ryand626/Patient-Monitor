@@ -18,6 +18,8 @@
 		94167A2B1A0AFBE100861407 /* pulseicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94167A251A0AFBE100861407 /* pulseicon.png */; };
 		94167A2C1A0AFBE100861407 /* SpO2icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94167A271A0AFBE100861407 /* SpO2icon.png */; };
 		94167A2D1A0AFBE100861407 /* thermometericon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94167A291A0AFBE100861407 /* thermometericon.png */; };
+		9426E6EF1A1DF29900F42C83 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9426E6EE1A1DF29900F42C83 /* QuartzCore.framework */; };
+		9429844A1A218C8300AC1028 /* Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = 942984491A218C8300AC1028 /* Graph.m */; };
 		945D31501A0BD253009712FC /* ekg.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D314F1A0BD253009712FC /* ekg.png */; };
 		945D31521A0BD69E009712FC /* spo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D31511A0BD69E009712FC /* spo2.png */; };
 		945D31541A0BD87F009712FC /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 945D31531A0BD87F009712FC /* black.jpg */; };
@@ -26,9 +28,25 @@
 		945D315D1A0BE4E9009712FC /* celsiusicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D315B1A0BE4E9009712FC /* celsiusicon.png */; };
 		945D315E1A0BE4E9009712FC /* faranheiticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D315C1A0BE4E9009712FC /* faranheiticon.png */; };
 		945D31601A0BE66E009712FC /* settingsicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D315F1A0BE66E009712FC /* settingsicon.png */; };
+		945E6F651A242490009923F4 /* TheData.m in Sources */ = {isa = PBXBuildFile; fileRef = 945E6F631A242490009923F4 /* TheData.m */; };
+		945E6F6A1A242547009923F4 /* DemoData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 945E6F691A242547009923F4 /* DemoData.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		940D95761A1E4E1F00CEA9DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 940D95701A1E4E1F00CEA9DE /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = CorePlot;
+		};
+		940D95781A1E4E1F00CEA9DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 940D95701A1E4E1F00CEA9DE /* CorePlot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0730F600109492D800E95162;
+			remoteInfo = UnitTests;
+		};
 		94167A121A0AED2700861407 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 941679F01A0AED2700861407 /* Project object */;
@@ -39,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		940D95701A1E4E1F00CEA9DE /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = "../../../../../../Downloads/core-plot-master/framework/CorePlot.xcodeproj"; sourceTree = "<group>"; };
 		941679F81A0AED2700861407 /* Patient Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Patient Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		941679FC1A0AED2700861407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		941679FD1A0AED2700861407 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -57,6 +76,9 @@
 		94167A261A0AFBE100861407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/pulseicon.png; sourceTree = "<group>"; };
 		94167A281A0AFBE100861407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/SpO2icon.png; sourceTree = "<group>"; };
 		94167A2A1A0AFBE100861407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/thermometericon.png; sourceTree = "<group>"; };
+		9426E6EE1A1DF29900F42C83 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		942984481A218C8300AC1028 /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
+		942984491A218C8300AC1028 /* Graph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Graph.m; sourceTree = "<group>"; };
 		945D314F1A0BD253009712FC /* ekg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ekg.png; sourceTree = "<group>"; };
 		945D31511A0BD69E009712FC /* spo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spo2.png; sourceTree = "<group>"; };
 		945D31531A0BD87F009712FC /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
@@ -65,6 +87,9 @@
 		945D315B1A0BE4E9009712FC /* celsiusicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = celsiusicon.png; sourceTree = "<group>"; };
 		945D315C1A0BE4E9009712FC /* faranheiticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faranheiticon.png; sourceTree = "<group>"; };
 		945D315F1A0BE66E009712FC /* settingsicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsicon.png; sourceTree = "<group>"; };
+		945E6F621A242490009923F4 /* TheData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheData.h; sourceTree = "<group>"; };
+		945E6F631A242490009923F4 /* TheData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheData.m; sourceTree = "<group>"; };
+		945E6F691A242547009923F4 /* DemoData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DemoData.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9426E6EF1A1DF29900F42C83 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,9 +111,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		940D95711A1E4E1F00CEA9DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				940D95771A1E4E1F00CEA9DE /* CorePlot.framework */,
+				940D95791A1E4E1F00CEA9DE /* UnitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		941679EF1A0AED2700861407 = {
 			isa = PBXGroup;
 			children = (
+				940D95701A1E4E1F00CEA9DE /* CorePlot.xcodeproj */,
+				9426E6EE1A1DF29900F42C83 /* QuartzCore.framework */,
 				941679FA1A0AED2700861407 /* Patient Monitor */,
 				94167A141A0AED2700861407 /* Patient MonitorTests */,
 				941679F91A0AED2700861407 /* Products */,
@@ -110,6 +147,10 @@
 				94167A001A0AED2700861407 /* AppDelegate.m */,
 				94167A021A0AED2700861407 /* ViewController.h */,
 				94167A031A0AED2700861407 /* ViewController.m */,
+				945E6F621A242490009923F4 /* TheData.h */,
+				945E6F631A242490009923F4 /* TheData.m */,
+				942984481A218C8300AC1028 /* Graph.h */,
+				942984491A218C8300AC1028 /* Graph.m */,
 				94167A051A0AED2700861407 /* Main.storyboard */,
 				94167A081A0AED2700861407 /* Images.xcassets */,
 				94167A0A1A0AED2700861407 /* LaunchScreen.xib */,
@@ -121,6 +162,7 @@
 		941679FB1A0AED2700861407 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				945E6F691A242547009923F4 /* DemoData.csv */,
 				945D315F1A0BE66E009712FC /* settingsicon.png */,
 				945D315B1A0BE4E9009712FC /* celsiusicon.png */,
 				945D315C1A0BE4E9009712FC /* faranheiticon.png */,
@@ -224,6 +266,12 @@
 			mainGroup = 941679EF1A0AED2700861407;
 			productRefGroup = 941679F91A0AED2700861407 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 940D95711A1E4E1F00CEA9DE /* Products */;
+					ProjectRef = 940D95701A1E4E1F00CEA9DE /* CorePlot.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				941679F71A0AED2700861407 /* Patient Monitor */,
@@ -231,6 +279,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		940D95771A1E4E1F00CEA9DE /* CorePlot.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CorePlot.framework;
+			remoteRef = 940D95761A1E4E1F00CEA9DE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		940D95791A1E4E1F00CEA9DE /* UnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.xctest;
+			remoteRef = 940D95781A1E4E1F00CEA9DE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		941679F61A0AED2700861407 /* Resources */ = {
@@ -242,6 +307,7 @@
 				945D31521A0BD69E009712FC /* spo2.png in Resources */,
 				94167A071A0AED2700861407 /* Main.storyboard in Resources */,
 				94167A2D1A0AFBE100861407 /* thermometericon.png in Resources */,
+				945E6F6A1A242547009923F4 /* DemoData.csv in Resources */,
 				945D315A1A0BE04A009712FC /* alarmonIcon.png in Resources */,
 				94167A2C1A0AFBE100861407 /* SpO2icon.png in Resources */,
 				945D31571A0BDC0D009712FC /* ekgicon.png in Resources */,
@@ -269,8 +335,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9429844A1A218C8300AC1028 /* Graph.m in Sources */,
 				94167A041A0AED2700861407 /* ViewController.m in Sources */,
 				94167A011A0AED2700861407 /* AppDelegate.m in Sources */,
+				945E6F651A242490009923F4 /* TheData.m in Sources */,
 				941679FE1A0AED2700861407 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,8 +511,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Patient_Monitor-elmagomosrdnprgribgtjnkojvpu/Build/Products/Debug",
+				);
 				INFOPLIST_FILE = "Patient Monitor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -453,8 +526,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Patient_Monitor-elmagomosrdnprgribgtjnkojvpu/Build/Products/Debug",
+				);
 				INFOPLIST_FILE = "Patient Monitor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

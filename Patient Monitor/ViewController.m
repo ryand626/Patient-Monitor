@@ -15,13 +15,11 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-
-    
     [super viewDidLoad];
 
     [self initialize_dimentions];
-    
     [self addDefaultViews];
+    [self initializeGraphs];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +30,7 @@
 // Set the dimentions of the frames when the view first loads
 -(void)initialize_dimentions{
     // Position of the lower bar as a percentage of the screen
-    float lower_bar_scale = .80;
+    float lower_bar_scale = .90;
     // Position of the right bar as a percentage of the screen
     float right_bar_scale = .70;
     // Number of breaks in the side view
@@ -65,14 +63,32 @@
     side_view_height = window.frame.size.height*lower_bar_scale;
 }
 
+-(void)initializeGraphs{
+    graphData = [[TheData alloc] init];
+    
+    EKG_Graph = [[Graph alloc] initWithFrame:main_view.frame];
+    SPO2_Graph = [[Graph alloc] initWithFrame:SPO2.frame];
+    
+    
+    [EKG_Graph.graphXData addObjectsFromArray:[graphData getDataX]];
+    [EKG_Graph.graphYData addObjectsFromArray:[graphData getDataY]];
+   // [EKG addSubview:EKG_Graph];
+    
+    [SPO2_Graph.graphXData addObjectsFromArray:[graphData getDataX]];
+    [SPO2_Graph.graphYData addObjectsFromArray:[graphData getDataY]];
+    [SPO2 addSubview:SPO2_Graph];
+    
+    main_graph = EKG_Graph.viewForBaselineLayout;
+}
+
 // Create the bounds where elements will be drawn
 -(void)addDefaultViews{
     main_view = [[UIView alloc] initWithFrame:CGRectMake(main_view_x, main_view_y, main_view_width, main_view_height)];
-    [main_view setBackgroundColor:[UIColor whiteColor]];
+    //[main_view setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:main_view];
     
     side_view = [[UIView alloc] initWithFrame:CGRectMake(side_view_x, side_view_y, side_view_width, side_view_height)];
-    [side_view setBackgroundColor:[UIColor blueColor]];
+    //[side_view setBackgroundColor:[UIColor blueColor]];
     [self.view addSubview:side_view];
     
     [self makeBottomBar];
@@ -91,6 +107,7 @@
     [self.view addSubview:SPO2_Button];
     [self.view addSubview:PULSE_Button];
     [self.view addSubview:TEMPERATURE_Button];
+    
 }
 -(void)makeBottomBar{
     layout_index = 0;
@@ -101,10 +118,17 @@
     
     // Add a layout button
     layout = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width/2-button_width/2, bottom_bar_height/2-button_height/2, button_width, button_height)];
-    [layout setBackgroundColor:[UIColor whiteColor]];
     [layout addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [layout setBackgroundImage:[UIImage imageNamed:@"settingsicon.png" ] forState:UIControlStateNormal];
     [bottom_bar addSubview:layout];
     
+    // Add Text to the layout button
+    UILabel *flavortext = [[UILabel alloc] initWithFrame:CGRectMake(bottom_bar_x+300, bottom_bar_y,300,bottom_bar_height)];
+    [flavortext setText:@"Change Layout:"];
+    [flavortext setTextColor: [UIColor whiteColor]];
+    //[flavortext setBackgroundColor:[UIColor grayColor]];
+    [self.view addSubview:flavortext];
+    [self.view bringSubviewToFront:flavortext];
     
 }
 
@@ -117,7 +141,7 @@
     EKG = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     [EKG setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"ekg.png"]]];
     
-    EKG_Button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 100, 100)];
+    EKG_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [EKG_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [EKG_Button setBackgroundImage:[UIImage imageNamed:@"ekgicon.png" ] forState:UIControlStateNormal];
 
@@ -134,11 +158,9 @@
     SPO2 = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     [SPO2 setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"spo2.png"]]];
     
-    SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 100, 100)];
+    SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [SPO2_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [SPO2_Button setBackgroundImage:[UIImage imageNamed:@"SpO2icon.png"] forState:UIControlStateNormal];
-    
-    
 }
 
 -(void)updatePULSE{
@@ -150,7 +172,7 @@
     PULSE = [[UIView alloc] initWithFrame:CGRectMake(x, y, width,height)];
     [PULSE setBackgroundColor:[UIColor magentaColor]];
     
-    PULSE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 100, 100)];
+    PULSE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [PULSE_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [PULSE_Button setBackgroundImage:[UIImage imageNamed:@"pulseicon.png"] forState:UIControlStateNormal];
 }
@@ -164,38 +186,46 @@
     TEMPERATURE = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     [TEMPERATURE setBackgroundColor:[UIColor redColor]];
     
-    TEMPERATURE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 100, 100)];
+    TEMPERATURE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [TEMPERATURE_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [TEMPERATURE_Button setBackgroundImage:[UIImage imageNamed:@"thermometericon.png"] forState:UIControlStateNormal];
 }
 // TODO: Make this better by using the number of children of the view in a for loop to condense the code
 -(void) buttonClicked:(UIButton*)sender
 {
-     CGRect temp = main_view.frame;
+    CGRect temp = main_view.frame;
+    CGRect tempGraph = main_graph.frame;
     //UIView *tempButton = main_button;
-    
+    [self.view sendSubviewToBack: main_view];
     if(sender == EKG_Button){
         if(main_view != EKG){
+            
             [main_view setFrame:EKG.frame];
             [main_button setFrame:EKG_Button.frame];
             
             [EKG setFrame:temp];
             [EKG_Button setFrame:CGRectMake(0, 0, 0, 0)];
+            [EKG_Graph setFrame:tempGraph];
             
             main_view = EKG;
             main_button = EKG_Button;
+            main_graph = EKG_Graph;
+            
         }
     }
     if(sender == SPO2_Button){
         if(main_view != SPO2){
             [main_view setFrame:SPO2.frame];
             [main_button setFrame:SPO2_Button.frame];
-        
+            [main_graph setFrame:SPO2_Graph.frame];
+            
             [SPO2 setFrame:temp];
             [SPO2_Button setFrame:CGRectMake(0, 0, 0, 0)];
-            
+            [SPO2_Graph setFrame:tempGraph];
+
             main_view = SPO2;
             main_button = SPO2_Button;
+            main_graph = SPO2_Graph;
         }
     }
     if(sender == PULSE_Button){
@@ -236,6 +266,18 @@
             NSLog(@"ERROR");
         }
     }
+    
+    [self.view bringSubviewToFront:main_view];
+    
+    [self.view bringSubviewToFront:SPO2_Graph];
+    
+    [self.view bringSubviewToFront:EKG_Button];
+    [self.view bringSubviewToFront:SPO2_Button];
+    [self.view bringSubviewToFront:PULSE_Button];
+    [self.view bringSubviewToFront:TEMPERATURE_Button];
+   // [self.view sendSubviewToBack:side_view];
+    
+    //[self.view bringSubviewToFront:graph];
 }
 
 @end
