@@ -1,6 +1,6 @@
 //
 //  Graph.m
-//  Demo
+//  Patient Monitor
 //
 //  Created by Ron Lasser on 9/13/14.
 //  Modified by Ryan Dougherty 11/22/14.
@@ -111,46 +111,13 @@
     
 }
 
-//- (void) PlacePoint
-//{
-//    NSArray *ax = [self.graphXData copy];
-//    NSArray *ay = [self.graphYData copy];
-//    
-//    for (NSInteger i = 0; i < [ax count]; ++i) {
-//        CGPoint pa = CGPointMake([ax[i] floatValue], [ay[i] floatValue]);
-//        //CGPoint p = CGPointMake([[ax objectAtIndex:i] floatValue], [[ay objectAtIndex:i] floatValue]);
-//        CGPoint ra = [self scalePoint:pa];
-//        //NSLog(@"point: %3.2f, %3.2f", ra.x, ra.y);
-//        [[UIColor greenColor] setFill];
-//        CGRect oRect = CGRectMake(ra.x, ra.y, 5, 5);
-//        UIBezierPath *pPath = [UIBezierPath bezierPathWithOvalInRect:oRect];
-//        [pPath fill];
-// /*
-//        [[UIColor redColor] setFill];
-//        UIBezierPath *gPath = [UIBezierPath bezierPath];
-//        [gPath moveToPoint:CGPointMake(150, 150)];
-//        [gPath addArcWithCenter:CGPointMake(150, 150) radius:25 startAngle:0 endAngle:3.14159 clockwise:YES];
-//        [gPath fill];
-// */
-//    }
-//    /*
-//     NSArray *x = @[@0, @1, @2, @3, @10, @25, @50];
-//     NSArray *y = @[@0, @1, @2, @3, @10, @25, @40];
-//     for (NSInteger i = 0; i < [x count]; ++i) {
-//     CGPoint p = CGPointMake([x[i] floatValue], [y[i] floatValue]);
-//     //CGPoint p = CGPointMake([[x objectAtIndex:i] floatValue], [[y objectAtIndex:i] floatValue]);
-//     CGPoint r = [self scalePoint:p];
-//     NSLog(@"point: %3.2f, %3.2f", r.x, r.y);
-//     }
-//    */
-//}
-
 // TODO: Get rid of giant cross back line
 - (void) AnimatedPlacePoint
 {
     NSArray *ax = [self.graphXData copy];
     NSArray *ay = [self.graphYData copy];
 
+    
     NSInteger numberOfPoints = 22;
 
     [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(goTime:) userInfo:nil repeats:YES];
@@ -159,6 +126,7 @@
     [self.dataColor setStroke];
     
     UIBezierPath *path = [UIBezierPath bezierPath];
+    [path setLineWidth:3.0f];
     [path moveToPoint:[self scalePoint:CGPointMake([ax[(self.plotStep)%35] floatValue], [ay[(self.plotStep)%35] floatValue])]];
     
     int pointsBeforeEnd = numberOfPoints-self.plotStep%35;
@@ -196,23 +164,6 @@
     
     return CGPointMake(plotX, plotY);
 }
-//
-//- (void) CGAnimatedPlacePoint: (CGContextRef) context
-//{
-//    NSArray *ax = [self.graphXData copy];
-//    NSArray *ay = [self.graphYData copy];
-//    
-//    [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(goTime:) userInfo:nil repeats:YES];
-//    
-//    for (NSInteger i = 0; i <= 22; ++i) {
-//        CGPoint na = CGPointMake([ax[(self.plotStep+i)%35] floatValue], [ay[(self.plotStep+i)%35] floatValue]);
-//        CGPoint ra = [self scalePoint:na];
-//        CGContextFillEllipseInRect(context, CGRectMake(ra.x, ra.y, 5, 5));
-//    }
-//
-//    
-//
-//}
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

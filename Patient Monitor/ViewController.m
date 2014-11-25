@@ -20,6 +20,7 @@
     [self initialize_dimentions];
     [self addDefaultViews];    
     [self initializeGraphs];
+    [self.view bringSubviewToFront:SPO2_Button];
 
 }
 
@@ -141,7 +142,6 @@
     float height = main_view_height;
     
     EKG = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    //[EKG setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"ekg.png"]]];
     
     EKG_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [EKG_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -158,7 +158,6 @@
     float height = side_view_height/number_of_side_doopies;
     
     SPO2 = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-   // [SPO2 setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"spo2.png"]]];
     
     SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [SPO2_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -192,12 +191,13 @@
     [TEMPERATURE_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [TEMPERATURE_Button setBackgroundImage:[UIImage imageNamed:@"thermometericon.png"] forState:UIControlStateNormal];
 }
+
 // TODO: Make this better by using the number of children of the view in a for loop to condense the code
 -(void) buttonClicked:(UIButton*)sender
 {
     CGRect tempFrame = main_view.frame;
-    Graph *tempGraph = main_graph;
-    //UIView *tempButton = main_button;
+    //Graph *tempGraph = main_graph;
+    CGRect tempButton = main_button.frame;
     [self.view sendSubviewToBack: main_view];
     if(sender == EKG_Button){
         if(main_view != EKG){
@@ -208,7 +208,7 @@
             [main_graph resize];
             
             [EKG setFrame:tempFrame];
-            [EKG_Button setFrame:CGRectMake(0, 0, 0, 0)];
+            [EKG_Button setFrame:tempButton];
             [EKG_Graph setFrame:EKG.frame];
             
             main_view = EKG;
@@ -226,7 +226,7 @@
             [main_graph resize];
             
             [SPO2 setFrame:tempFrame];
-            [SPO2_Button setFrame:CGRectMake(0, 0, 0, 0)];
+            [SPO2_Button setFrame:tempButton];
             [SPO2_Graph setFrame:SPO2.frame];
 
             main_view = SPO2;
@@ -243,7 +243,7 @@
             [main_graph resize];
             
             [PULSE setFrame:tempFrame];
-            [PULSE_Button setFrame:CGRectMake(0, 0, 0, 0)];
+            [PULSE_Button setFrame:tempButton];
 
             main_view = PULSE;
             main_button = PULSE_Button;
@@ -258,7 +258,7 @@
             [main_graph resize];
             
             [TEMPERATURE setFrame:tempFrame];
-            [TEMPERATURE_Button setFrame:CGRectMake(0, 0, 0, 0)];
+            [TEMPERATURE_Button setFrame:tempButton];
             
             main_view = TEMPERATURE;
             main_button = TEMPERATURE_Button;
@@ -285,6 +285,7 @@
     
     [self.view bringSubviewToFront:main_view];
     [self.view bringSubviewToFront:main_graph];
+    [self.view bringSubviewToFront:main_button];
     
     [self.view bringSubviewToFront:EKG_Button];
     [self.view bringSubviewToFront:SPO2_Button];

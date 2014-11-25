@@ -13,6 +13,4 @@
 - (NSArray *) getDataX;
 - (NSArray *) getDataY;
 
-
-
 @end
