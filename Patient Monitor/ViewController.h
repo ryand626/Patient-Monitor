@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Graph.h"
 #import "TheData.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 //#import <CorePlot/CorePlot.h>
 
-@interface ViewController : UIViewController{
+@interface ViewController : UIViewController<UIAlertViewDelegate>{
     Graph *graph;
     TheData *graphData;
     
@@ -80,6 +82,16 @@
     UIView *TEMPERATURE;
     UIButton *TEMPERATURE_Button;
     UILabel * TEMPERATURE_Label;
+    
+    // ALARM OPTIONS
+    bool isAlarmOn;
+    bool didGetPackage;
+    bool isConnected;
+    int alarmTimer;
+    
+    AVAudioPlayer* audioPlayer;
+    AVAudioPlayer* effectPlayer;
+    AVAudioPlayer* alarmPlayer;
 }
 @end
 

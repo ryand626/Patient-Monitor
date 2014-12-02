@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[self loadSoundFiles];
 
     [self initialize_dimentions];
     [self addDefaultViews];    
@@ -60,6 +61,8 @@
     isWindowUp = false;
     [self.view sendSubviewToBack:alarmWindow];
     
+    UITableViewCell* tableCell = [[UITableViewCell alloc]initWithFrame:CGRectMake(0, 0, window_width, 40)];
+    [tableCell setBackgroundColor:[UIColor redColor]];
 }
 
 // Set the dimentions of the frames when the view first loads
@@ -308,9 +311,9 @@
         layout_index = (layout_index+1)%2;
         if(layout_index == 0){
             NSLog(@"Switching to default view");
-            [main_view setFrame:CGRectMake(main_view_x, main_view_y, main_view_width, main_view_height)];
+            main_view.frame = CGRectMake(main_view_x, main_view_y, main_view_width, main_view_height);
         }else if (layout_index == 1){
-            [main_view setFrame:CGRectMake(main_view_x, main_view_y, window.frame.size.width, main_view_height)];
+            main_view.frame = CGRectMake(main_view_x, main_view_y, window.frame.size.width, main_view_height);
             NSLog(@"Switching to large view");
         }else if (layout_index == 2){
             NSLog(@"Switching to quadrant view");
@@ -318,7 +321,15 @@
             NSLog(@"ERROR");
         }
         [self.view bringSubviewToFront:main_graph];
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:.5];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        
         [main_graph setFrame:main_view.frame];
+        
+        [UIView commitAnimations];
+        
         [main_graph resize];
     }
     
@@ -334,14 +345,93 @@
     [self.view bringSubviewToFront:TEMPERATURE_Button];
     
     if(sender == alarmOptions){
+        float window_width = 400;
+        float window_height = 400;
+        float frame_height = 100;
+        
+        
+        [self.view bringSubviewToFront:alarmWindow];
         if(!isWindowUp){
-            [self.view bringSubviewToFront:alarmWindow];
+            
+            alarmWindow.frame = CGRectMake(window.frame.size.width/2-window_width/2,bottom_bar_y,alarmWindow.frame.size.width,alarmWindow.frame.size.height);
+            
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            
+            alarmWindow.frame = CGRectMake(window.frame.size.width/2-window_width/2, main_view_height/2-window_height/2, window_width, window_height);
+            
+            [UIView commitAnimations];
         }else{
-            [self.view sendSubviewToBack:alarmWindow];
+           
+           // alarmWindow.frame = CGRectMake(window.frame.size.width/2-window_width/2, main_view_height/2-window_height/2, window_width, window_height);
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            alarmWindow.frame = CGRectMake(window.frame.size.width/2-window_width/2,window.frame.size.height,alarmWindow.frame.size.width,alarmWindow.frame.size.height);
+            [UIView commitAnimations];
+            
         }
         isWindowUp = !isWindowUp;
     }
 
+}
+
+-(void)checkHeat{
+   // if(self.instData >= 32.2){
+        if(isAlarmOn){
+            UIAlertView *tempAlert = [[UIAlertView alloc] initWithTitle:@"High Temperatrue"
+                                                                message:@"Your Temperature is above 90"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Thank You"
+                                                      otherButtonTitles:nil];
+            [tempAlert setTag:1];
+            alarmTimer = 0;
+            [tempAlert show];
+            [self playAlarm];
+            //myAlertView = tempAlert;
+        }
+        isAlarmOn = false;
+ //   }else{
+//        isAlarmOn = true;
+ //   }
+}
+
+-(void)loadSoundFiles{
+    // Set up file path to audio file
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"alarm" ofType:@"mp3"];
+    NSURL* file = [NSURL fileURLWithPath:path];
+    
+    // Set up audio player
+    alarmPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:nil];
+    [alarmPlayer prepareToPlay];
+    alarmPlayer.numberOfLoops = -1;
+    
+    path = [[NSBundle mainBundle] pathForResource:@"Tink" ofType:@"mp3"];
+    file = [NSURL fileURLWithPath:path];
+    
+    // Set up audio player
+    effectPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:nil];
+    [effectPlayer prepareToPlay];
+    
+    NSLog(@"Sound files loaded");
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(alertView.tag == 1){
+        if(buttonIndex == 0){
+            [alarmPlayer pause];
+        }
+    }
+}
+
+- (void) playAlarm {
+    NSLog(@"Playing Sound");
+    if ([alarmPlayer isPlaying]) {
+        [alarmPlayer pause];
+    } else {
+        [alarmPlayer play];
+    }
 }
 
 @end
