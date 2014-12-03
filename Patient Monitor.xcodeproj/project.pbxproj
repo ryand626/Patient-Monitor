@@ -20,6 +20,7 @@
 		94167A2D1A0AFBE100861407 /* thermometericon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94167A291A0AFBE100861407 /* thermometericon.png */; };
 		9426E6EF1A1DF29900F42C83 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9426E6EE1A1DF29900F42C83 /* QuartzCore.framework */; };
 		9429844A1A218C8300AC1028 /* Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = 942984491A218C8300AC1028 /* Graph.m */; };
+		945CD0071A2E186E001E9214 /* AlarmOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 945CD0061A2E186E001E9214 /* AlarmOptions.m */; };
 		945D31501A0BD253009712FC /* ekg.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D314F1A0BD253009712FC /* ekg.png */; };
 		945D31521A0BD69E009712FC /* spo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D31511A0BD69E009712FC /* spo2.png */; };
 		945D31541A0BD87F009712FC /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 945D31531A0BD87F009712FC /* black.jpg */; };
@@ -79,6 +80,8 @@
 		9426E6EE1A1DF29900F42C83 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		942984481A218C8300AC1028 /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
 		942984491A218C8300AC1028 /* Graph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Graph.m; sourceTree = "<group>"; };
+		945CD0061A2E186E001E9214 /* AlarmOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmOptions.m; sourceTree = "<group>"; };
+		945CD0081A2E18AA001E9214 /* AlarmOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmOptions.h; sourceTree = "<group>"; };
 		945D314F1A0BD253009712FC /* ekg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ekg.png; sourceTree = "<group>"; };
 		945D31511A0BD69E009712FC /* spo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spo2.png; sourceTree = "<group>"; };
 		945D31531A0BD87F009712FC /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
@@ -147,6 +150,8 @@
 				94167A001A0AED2700861407 /* AppDelegate.m */,
 				94167A021A0AED2700861407 /* ViewController.h */,
 				94167A031A0AED2700861407 /* ViewController.m */,
+				945CD0061A2E186E001E9214 /* AlarmOptions.m */,
+				945CD0081A2E18AA001E9214 /* AlarmOptions.h */,
 				945E6F621A242490009923F4 /* TheData.h */,
 				945E6F631A242490009923F4 /* TheData.m */,
 				942984481A218C8300AC1028 /* Graph.h */,
@@ -337,6 +342,7 @@
 			files = (
 				9429844A1A218C8300AC1028 /* Graph.m in Sources */,
 				94167A041A0AED2700861407 /* ViewController.m in Sources */,
+				945CD0071A2E186E001E9214 /* AlarmOptions.m in Sources */,
 				94167A011A0AED2700861407 /* AppDelegate.m in Sources */,
 				945E6F651A242490009923F4 /* TheData.m in Sources */,
 				941679FE1A0AED2700861407 /* main.m in Sources */,

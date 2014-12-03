@@ -118,7 +118,7 @@
     NSArray *ay = [self.graphYData copy];
 
     
-    NSInteger numberOfPoints = 22;
+    NSInteger numberOfPoints = 30;
 
     [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(goTime:) userInfo:nil repeats:YES];
     

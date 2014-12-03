@@ -11,6 +11,7 @@
 #import "TheData.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "AlarmOptions.h"
 
 //#import <CorePlot/CorePlot.h>
 
@@ -46,12 +47,7 @@
     float bottom_bar_width;
     float bottom_bar_height;
     
-    // Alarm Properties
-    UIView *alarmWindow;
-    UILabel *alarmText;
-    bool isWindowUp;
-    UIScrollView *alarmScroll;
-    UITableView *alarmOptionsTable;
+    
 
     // Right Sidebar properties
     UIView *side_view;
@@ -92,6 +88,17 @@
     AVAudioPlayer* audioPlayer;
     AVAudioPlayer* effectPlayer;
     AVAudioPlayer* alarmPlayer;
+    
+    // Alarm Window Properties
+    UIView *alarmWindow;
+    UILabel *alarmText;
+    bool isWindowUp;
+    UIScrollView *alarmScroll;
+    UIButton *alarmButton;
+    UISwitch *alarmSwitch;
+   // UITableView *alarmOptionsTable;
+    
+    AlarmOptions *alarm;
 }
 @end
 
