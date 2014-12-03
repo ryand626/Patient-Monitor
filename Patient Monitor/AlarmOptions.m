@@ -288,6 +288,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"Entered: %@",[[alertView textFieldAtIndex:0] text]);
+    // Changes from menu
     if(alertView.tag == 1){
         highBloodPressure = [[[alertView textFieldAtIndex:0]text] floatValue];
         
@@ -341,10 +342,39 @@
             [alert setTag:1];
             [alert show];
         }
-        
     }
     
+    // Changes from alerts
     if(alertView.tag == 10){
+        if(buttonIndex == 0){
+            isTemperatureOn = false;
+            [TemperatureToggle setOn:TemperatureToggle];
+        }else{
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            UITextField * alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+            alertTextField.placeholder = @"Enter new value";
+            [alert setTag:2];
+            [alert show];
+        }
+    }
+    if(alertView.tag == 11){
+        
+    }
+    if(alertView.tag == 12){
+        
+    }
+    if(alertView.tag == 13){
+        
+    }
+    if(alertView.tag == 14){
+        
+    }
+    if(alertView.tag == 15){
+        
+    }
+    if(alertView.tag == 16){
         
     }
     
