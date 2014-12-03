@@ -23,7 +23,7 @@ const unsigned long MAX_UNSIGNED_UL = 0xFFFFFFFF;
 unsigned long start_time, last_time, last_send_time;
 unsigned ms_index, s_index, packet_cnt;
 unsigned last_reading;
-
+unsigned ms_readings[1000];
 double s_avgs[10];
 double last_s_avg;
 double tens_avg;
