@@ -17,6 +17,12 @@
     UIView *main_screen;
     UIWindow *window;
     
+    // Inputs
+    float bloodPressure;
+    float temperature;
+    float pulse;
+    float spo2;
+    
     // Thresholds
     float highBloodPressure;
     float highTemperature;
@@ -33,12 +39,14 @@
     BOOL isTemperatureOn;
     BOOL isPulseOn;
     BOOL isSPO2On;
+    BOOL isAlarmShowing;
     
     // Window Options
     bool isWindowUp;
     float window_width;
     float window_height;
     float frame_height;
+    float margin;
     
     UIView *alarmOptionsWindow;
     UIScrollView *alarmScroll;
@@ -47,9 +55,13 @@
     UIButton *alarmButton;
     
     // Labels
+    float label_height;
+    float high_label_offset;
+    float low_label_offset;
+    
     UILabel* BloodPressureLabel;
     UILabel* highBloodLabel;
-    UILabel* lowBloodLevel;
+    UILabel* lowBloodLabel;
     
     UILabel* TemperatureLabel;
     UILabel* highTempLabel;
@@ -66,6 +78,8 @@
     // Edit Buttons
     float edit_button_width;
     float edit_button_height;
+    float edit_high_offset;
+    float edit_low_offset;
     
     UIButton* editHighBloodPressure;
     UIButton* editLowBloodPressure;
