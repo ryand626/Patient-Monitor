@@ -100,5 +100,9 @@
     
     AlarmOptions *alarm;
 }
+@property (assign) NSURL* myURL;
+
+
+
 @end
 

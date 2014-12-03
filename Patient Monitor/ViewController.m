@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#define slope 0.0614f
+#define offset -5.6311f
 
 @interface ViewController ()
 
@@ -27,6 +29,11 @@
     [alarm setButton:alarmOptions];
     [alarm setMainView:self.view window:window];
     [alarm initializeAlarms];
+    
+    
+    // COMMUNICATION STUFFF
+    self.myURL = @"http://10.3.13.158";
+    //[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(serverRequest:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -368,5 +375,66 @@
         [alarmPlayer play];
     }
 }
+
+
+// Make request to server
+-(void)serverRequest:(NSTimer*)timer{
+    //NSLog(@"Requesting Server");
+    // Load URL
+    NSURL *url = [NSURL URLWithString:self.myURL];
+    if(!url){
+        NSLog(@"NO URL");
+        isConnected = false;
+        return;
+    }
+    isConnected = true;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
+        [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        
+        NSURLResponse *response;
+        NSError *error;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if(!data){
+            NSLog(@"NO DATA");
+            NSLog(@"%@",[error localizedDescription]);
+            didGetPackage = false;
+            return;
+        }
+        didGetPackage = true; // If data was obtained, set the flag to true
+        // NSLog(@"%@", data);
+        [self performSelectorOnMainThread:@selector(handleResponse:) withObject:data waitUntilDone:YES];
+    });
+}
+
+// Handle server response
+-(void)handleResponse:(NSData *)response{
+    if(response){
+        NSError *error;
+        
+        NSDictionary *jsonPackage = [NSJSONSerialization JSONObjectWithData:response options:kNilOptions error:&error];
+        NSArray *arduinoData = jsonPackage[@"packet"];
+        
+        NSLog(@"%@", jsonPackage);
+        
+        alarm.temperature = [self convert:[[arduinoData valueForKey:@"last_reading"] floatValue]];
+        alarm.bloodPressure = [self convert:[[arduinoData valueForKey:@"s_avg"] floatValue]];
+        alarm.pulse = [self convert:[[arduinoData valueForKey:@"tens_avg"] floatValue]];
+        
+    }else{
+        NSLog(@"ERROR OBTAINING RESULTS, CHECK URL");
+    }
+}
+
+
+-(float)convert:(float)degree{
+    return degree * slope + offset;
+}
+
 
 @end

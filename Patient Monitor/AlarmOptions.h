@@ -18,10 +18,10 @@
     UIWindow *window;
     
     // Inputs
-    float bloodPressure;
-    float temperature;
-    float pulse;
-    float spo2;
+   // float bloodPressure;
+    //float temperature;
+    //float pulse;
+    //float spo2;
     
     // Thresholds
     float highBloodPressure;
@@ -105,6 +105,10 @@
     UIButton *showButton;
     
 }
+@property (assign) float bloodPressure;
+@property (assign) float temperature;
+@property (assign) float pulse;
+@property (assign) float spo2;
 
 - (void) initializeAlarms;
 - (void) setMainView:(UIView*)view window:(UIWindow*)screen;

@@ -64,10 +64,10 @@
 }
 
 -(void)initializeData{
-    bloodPressure = 900;
-    temperature = 90;
-    pulse = 30;
-    spo2 = 89;
+    _bloodPressure = 900;
+    _temperature = 90;
+    _pulse = 30;
+    _spo2 = 89;
     
 }
 
@@ -427,18 +427,24 @@
 }
 
 - (void)checkThresholds:(NSTimer *)timer{
+   NSLog([NSString stringWithFormat:@"%f", _bloodPressure]);
+    NSLog([NSString stringWithFormat:@"%f", _temperature]);
+    NSLog([NSString stringWithFormat:@"%f", _pulse]);
+    NSLog([NSString stringWithFormat:@"%f", _spo2]);
+   // NSLog(self.temperature);
+
     NSLog(@"checking");
     if(isAlarmShowing){
         return;
     }
     
-    if(bloodPressure > highBloodPressure){
+    if(_bloodPressure > highBloodPressure){
         isAlarmShowing = YES;
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"High Temperature" message:@"Temperature exceeded threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
         [alert setTag:9];
         [alert show];
     }
-    if(bloodPressure < lowBloodPressure){
+    if(_bloodPressure < lowBloodPressure){
         isAlarmShowing = YES;
     }
 }
