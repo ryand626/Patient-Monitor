@@ -29,6 +29,8 @@
     [self addButtons];
     
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkThresholds:) userInfo:nil repeats:YES];
+    
+    alarmOptionsWindow.frame = CGRectMake(window.frame.size.width/2-window_width/2,window.frame.size.height,alarmOptionsWindow.frame.size.width,alarmOptionsWindow.frame.size.height);
 }
 
 -(void)initializeDimentions{
@@ -562,7 +564,7 @@
 }
 
 - (void) loadSoundFiles{
-    
+    // No sound files used...could do this if had more time
 }
 
 - (void) setMainView:(UIView*)view window:(UIWindow *)screen{

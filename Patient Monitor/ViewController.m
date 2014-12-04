@@ -197,22 +197,29 @@
     [self.view addSubview:bottom_bar];
     
     // Add a layout button
-    layout = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width/2-button_width/2, bottom_bar_height/2-button_height/2, button_width, button_height)];
+    layout = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width/3-button_width/2, bottom_bar_height/2-button_height/2, button_width, button_height)];
     [layout addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [layout setBackgroundImage:[UIImage imageNamed:@"expandicon.png" ] forState:UIControlStateNormal];
     [bottom_bar addSubview:layout];
     
     // Add Text to the layout button
-    UILabel *layoutText = [[UILabel alloc] initWithFrame:CGRectMake(bottom_bar_x+300, bottom_bar_y,300,bottom_bar_height)];
+    UILabel *layoutText = [[UILabel alloc] initWithFrame:CGRectMake(bottom_bar_x+100, bottom_bar_y,300,bottom_bar_height)];
     [layoutText setText:@"Change Layout:"];
     [layoutText setTextColor: [UIColor whiteColor]];
     [self.view addSubview:layoutText];
     [self.view bringSubviewToFront:layoutText];
     
     // Make alarm options button
-    alarmOptions = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width/2-button_width/2+button_width*2, bottom_bar_height/2-button_height/2, button_width, button_height)];
+    alarmOptions = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width*2/3-button_width/2, bottom_bar_height/2-button_height/2, button_width, button_height)];
         [alarmOptions setBackgroundImage:[UIImage imageNamed:@"alarmonIcon.png" ] forState:UIControlStateNormal];
     [bottom_bar addSubview:alarmOptions];
+    
+    // Add Text to the alarm options button
+    UILabel *optionsText = [[UILabel alloc] initWithFrame:CGRectMake(bottom_bar_x+450, bottom_bar_y,450,bottom_bar_height)];
+    [optionsText setText:@"Alarm Options:"];
+    [optionsText setTextColor: [UIColor whiteColor]];
+    [self.view addSubview:optionsText];
+    [self.view bringSubviewToFront:optionsText];
     
 }
 
