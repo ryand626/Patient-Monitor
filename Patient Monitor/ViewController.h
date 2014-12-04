@@ -25,12 +25,23 @@
     
     float button_width;
     float button_height;
+    
+    // Data
+    float bloodpressure;
+    float systolic;
+    float diastolic;
+    
+    float temperature;
+    float pulse;
+    float spo2;
 
     // ==========Boxes for view Layouts=========
 
     // Main view properties (whole screen or 2/3)
     UIView *main_view;
     UIButton *main_button;
+    UILabel *main_label;
+    
     Graph *main_graph;
     float main_view_x;
     float main_view_y;
@@ -64,20 +75,26 @@
     Graph *EKG_Graph;
 
     // Right Sidebar properties
+    // SPO2
     UIView *SPO2;
     UIButton *SPO2_Button;
     UILabel *SPO2_Label;
     Graph *SPO2_Graph;
 
-    // Right Sidebar properties
+    // Pulse
     UIView *PULSE;
     UIButton *PULSE_Button;
     UILabel * PULSE_Label;
     
-    // Right Sidebar properties
+    // Temperature
     UIView *TEMPERATURE;
     UIButton *TEMPERATURE_Button;
-    UILabel * TEMPERATURE_Label;
+    UILabel *TEMPERATURE_Label;
+    
+    // Blood Pressure
+    UIView *BloodPressure;
+    UIButton *BloodPressure_Button;
+    UILabel *BloodPressure_Label;
     
     // ALARM OPTIONS
     bool isAlarmOn;

@@ -21,15 +21,20 @@
     //[self loadSoundFiles];
 
     [self initialize_dimentions];
-    [self addDefaultViews];    
+    
+    alarm = [AlarmOptions alloc];
+    [self initializeData];
+    
+    [self addDefaultViews];
     [self initializeGraphs];
     [self.view bringSubviewToFront:SPO2_Button];
+
  //   [self makeAlarmWindow];
-    alarm = [AlarmOptions alloc];
+  
     [alarm setButton:alarmOptions];
     [alarm setMainView:self.view window:window];
     [alarm initializeAlarms];
-    
+    [SPO2 bringSubviewToFront:SPO2_Label];
     
     // COMMUNICATION STUFFF
     self.myURL = @"http://10.3.13.158";
@@ -47,7 +52,7 @@
     // Position of the right bar as a percentage of the screen
     float right_bar_scale = .70;
     // Number of breaks in the side view
-    number_of_side_doopies = 3;
+    number_of_side_doopies = 4;
     // Number of breaks in the main view
     number_of_main_view_breaks = 0;
     // Buttons
@@ -55,7 +60,11 @@
     button_height = 75;
     
     // Get window data
-    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    if([[UIScreen mainScreen] bounds].size.width>[[UIScreen mainScreen] bounds].size.width){
+        window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    }else{
+        window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width)];
+    }
     
     // Set Main View Bounds
     main_view_x = 0;
@@ -78,6 +87,24 @@
 
 -(void)initializeGraphs{
     graphData = [[TheData alloc] init];
+
+    //////////
+    NSString *filePathCSV = [[NSBundle mainBundle] pathForResource:@"Spo2graphdata" ofType:@"csv"];
+    
+    [self readColumnFromCSV:filePathCSV AtColumn:1];
+    NSMutableArray *dataX;
+    NSMutableArray *dataY;
+    
+    dataX = [NSMutableArray arrayWithArray: [self readColumnFromCSV:filePathCSV AtColumn:0] ];
+    dataY = [NSMutableArray arrayWithArray: [self readColumnFromCSV:filePathCSV AtColumn:1] ];
+    
+    for (NSInteger i = 0; i < [dataX count]; ++i) {
+        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        dataX[i] = [f numberFromString:[dataX objectAtIndex:i]]; // NSNumber
+        dataY[i] = [f numberFromString:[dataY objectAtIndex:i]]; // NSNumber
+    }
+    //////////
     
     EKG_Graph = [[Graph alloc] initWithFrame:main_view.frame];
     SPO2_Graph = [[Graph alloc] initWithFrame:SPO2.frame];
@@ -88,12 +115,48 @@
     [self.view addSubview:EKG_Graph];
     [EKG_Graph setGraphColor:[UIColor blackColor] WithShapeColor:[UIColor orangeColor]];
     
-    [SPO2_Graph.graphXData addObjectsFromArray:[graphData getDataX]];
-    [SPO2_Graph.graphYData addObjectsFromArray:[graphData getDataY]];
+    [SPO2_Graph.graphXData addObjectsFromArray:dataX];
+    [SPO2_Graph.graphYData addObjectsFromArray:dataY];
     [self.view addSubview:SPO2_Graph];
     [SPO2_Graph setGraphColor:[UIColor blackColor] WithShapeColor:[UIColor blueColor]];
     
     main_graph = EKG_Graph;
+}
+
+-(NSMutableArray *)readColumnFromCSV:(NSString*)path AtColumn:(int)column
+{
+    
+    NSMutableArray *readArray=[[NSMutableArray alloc]init];
+    
+    NSString *fileDataString=[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    
+    NSArray *linesArray=[fileDataString componentsSeparatedByString:@"\r\n"];
+    
+    for (NSString *lineString in linesArray)
+    {
+        NSArray *columnArray=[lineString componentsSeparatedByString:@","];
+        [readArray addObject:[columnArray objectAtIndex:column]];
+        
+    }
+    
+    return readArray;
+    
+    // for debug: NSLog(@"%@",readArray);
+    
+}
+
+-(void)initializeData{
+    bloodpressure = 100;
+    temperature = 98.5;
+    pulse = 60;
+    spo2 = 1;
+    systolic = 120;
+    diastolic = 80;
+    
+    alarm.bloodPressure = bloodpressure;
+    alarm.temperature = temperature;
+    alarm.pulse = pulse;
+    alarm.spo2 = spo2;
 }
 
 // Create the bounds where elements will be drawn
@@ -108,20 +171,23 @@
     
     [self makeBottomBar];
     
-    [self updateEKG];
-    [self updateSPO2];
-    [self updatePULSE];
-    [self updateTEMPERATURE];
+    [self initializeEKG];
+    [self initializeSPO2];
+    [self initializePULSE];
+    [self initializeTEMPERATURE];
+    [self initializeBloodPressure];
     
     [self.view addSubview:EKG];
     [self.view addSubview:SPO2];
     [self.view addSubview:PULSE];
     [self.view addSubview:TEMPERATURE];
+    [self.view addSubview:BloodPressure];
     
     [self.view addSubview:EKG_Button];
     [self.view addSubview:SPO2_Button];
     [self.view addSubview:PULSE_Button];
     [self.view addSubview:TEMPERATURE_Button];
+    [self.view addSubview:BloodPressure_Button];
     
 }
 -(void)makeBottomBar{
@@ -134,7 +200,7 @@
     // Add a layout button
     layout = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width/2-button_width/2, bottom_bar_height/2-button_height/2, button_width, button_height)];
     [layout addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [layout setBackgroundImage:[UIImage imageNamed:@"settingsicon.png" ] forState:UIControlStateNormal];
+    [layout setBackgroundImage:[UIImage imageNamed:@"expandicon.png" ] forState:UIControlStateNormal];
     [bottom_bar addSubview:layout];
     
     // Add Text to the layout button
@@ -146,12 +212,12 @@
     
     // Make alarm options button
     alarmOptions = [[UIButton alloc]initWithFrame:CGRectMake(bottom_bar_width/2-button_width/2+button_width*2, bottom_bar_height/2-button_height/2, button_width, button_height)];
-        [alarmOptions setBackgroundImage:[UIImage imageNamed:@"settingsicon.png" ] forState:UIControlStateNormal];
+        [alarmOptions setBackgroundImage:[UIImage imageNamed:@"alarmonIcon.png" ] forState:UIControlStateNormal];
     [bottom_bar addSubview:alarmOptions];
     
 }
 
--(void)updateEKG{
+-(void)initializeEKG{
     float x = main_view_x;
     float y = main_view_y;
     float width = main_view_width;
@@ -167,7 +233,7 @@
     main_button = EKG_Button;
 }
 
--(void)updateSPO2{
+-(void)initializeSPO2{
     float x = side_view_x;
     float y = side_view_y;
     float width = side_view_width;
@@ -175,37 +241,80 @@
     
     SPO2 = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     
+    SPO2_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SPO2.frame.size.width, SPO2.frame.size.height)];
+    [SPO2_Label setText:[NSString stringWithFormat:@"%.f",spo2]];
+    [SPO2_Label setTextAlignment:NSTextAlignmentRight];
+    [SPO2_Label setTextColor:[UIColor blueColor]];
+    [SPO2_Label setFont:[SPO2_Label.font fontWithSize:64]];
+    [SPO2 addSubview:SPO2_Label];
+    
     SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [SPO2_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [SPO2_Button setBackgroundImage:[UIImage imageNamed:@"SpO2icon.png"] forState:UIControlStateNormal];
 }
 
--(void)updatePULSE{
+-(void)initializePULSE{
     float x = side_view_x;
     float y = side_view_y+side_view_height/number_of_side_doopies;
     float width = side_view_width;
     float height = side_view_height/number_of_side_doopies;
     
     PULSE = [[UIView alloc] initWithFrame:CGRectMake(x, y, width,height)];
-    [PULSE setBackgroundColor:[UIColor magentaColor]];
+    [PULSE setBackgroundColor:[UIColor blackColor]];
+    
+    PULSE_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, PULSE.frame.size.width, PULSE.frame.size.height)];
+    [PULSE_Label setText:[NSString stringWithFormat:@"%.f",pulse]];
+    [PULSE_Label setTextAlignment:NSTextAlignmentCenter];
+    [PULSE_Label setTextColor:[UIColor magentaColor]];
+    [PULSE_Label setFont:[PULSE_Label.font fontWithSize:64]];
+    [PULSE addSubview:PULSE_Label];
     
     PULSE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [PULSE_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [PULSE_Button setBackgroundImage:[UIImage imageNamed:@"pulseicon.png"] forState:UIControlStateNormal];
 }
 
--(void)updateTEMPERATURE{
+-(void)initializeTEMPERATURE{
     float x = side_view_x;
     float y = side_view_y+2*side_view_height/number_of_side_doopies;
     float width = side_view_width;
     float height = side_view_height/number_of_side_doopies;
     
     TEMPERATURE = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    [TEMPERATURE setBackgroundColor:[UIColor redColor]];
+    [TEMPERATURE setBackgroundColor:[UIColor blackColor]];
+    
+    TEMPERATURE_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, TEMPERATURE.frame.size.width, TEMPERATURE.frame.size.height)];
+    [TEMPERATURE_Label setText:[NSString stringWithFormat:@"%.f",temperature]];
+    [TEMPERATURE_Label setTextAlignment:NSTextAlignmentCenter];
+    [TEMPERATURE_Label setTextColor:[UIColor redColor]];
+    [TEMPERATURE_Label setFont:[TEMPERATURE_Label.font fontWithSize:64]];
+    [TEMPERATURE addSubview:TEMPERATURE_Label];
     
     TEMPERATURE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [TEMPERATURE_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [TEMPERATURE_Button setBackgroundImage:[UIImage imageNamed:@"thermometericon.png"] forState:UIControlStateNormal];
+}
+
+-(void)initializeBloodPressure{
+    float x = side_view_x;
+    float y = side_view_y+3*side_view_height/number_of_side_doopies;
+    float width = side_view_width;
+    float height = side_view_height/number_of_side_doopies;
+    
+    BloodPressure = [[UIView alloc]initWithFrame:CGRectMake(x, y, width, height)];
+    [BloodPressure setBackgroundColor:[UIColor blackColor]];
+    
+    BloodPressure_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, BloodPressure.frame.size.width, BloodPressure.frame.size.height)];
+    [BloodPressure_Label setText:[[[NSString stringWithFormat:@"%.f",systolic] stringByAppendingString:@"/"]stringByAppendingString:[NSString stringWithFormat:@"%.f",diastolic]]];
+    [BloodPressure_Label setTextAlignment:NSTextAlignmentCenter];
+    [BloodPressure_Label setTextColor:[UIColor purpleColor]];
+    [BloodPressure_Label setFont:[BloodPressure_Label.font fontWithSize:64]];
+    [BloodPressure addSubview:BloodPressure_Label];
+    
+    BloodPressure_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
+    [BloodPressure_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [BloodPressure_Button setBackgroundImage:[UIImage imageNamed:@"bloodpressicon.png"] forState:UIControlStateNormal];
+    
 }
 
 // TODO: Make this better by using the number of children of the view in a for loop to condense the code
@@ -214,14 +323,18 @@
     CGRect tempFrame = main_view.frame;
     //Graph *tempGraph = main_graph;
     CGRect tempButton = main_button.frame;
+    
     [self.view sendSubviewToBack: main_view];
     if(sender == EKG_Button){
         if(main_view != EKG){
+            [main_label setFont:[main_label.font fontWithSize:64]];
             
             [main_view setFrame:EKG.frame];
             [main_button setFrame:EKG_Button.frame];
+            [main_label setFrame:CGRectMake(0, 0, EKG.frame.size.width, EKG.frame.size.height)];
             [main_graph setFrame:EKG.frame];
             [main_graph resize];
+
             
             [EKG setFrame:tempFrame];
             [EKG_Button setFrame:tempButton];
@@ -230,14 +343,18 @@
             main_view = EKG;
             main_button = EKG_Button;
             main_graph = EKG_Graph;
+            main_label = nil;
             [EKG_Graph resize];
-            
+            [main_label setFont:[main_label.font fontWithSize:128]];
         }
     }
     if(sender == SPO2_Button){
         if(main_view != SPO2){
+            [main_label setFont:[main_label.font fontWithSize:64]];
+            
             [main_view setFrame:SPO2.frame];
             [main_button setFrame:SPO2_Button.frame];
+            [main_label setFrame:CGRectMake(0, 0, SPO2.frame.size.width, SPO2.frame.size.height)];
             [main_graph setFrame:SPO2.frame];
             [main_graph resize];
             
@@ -248,37 +365,72 @@
             main_view = SPO2;
             main_button = SPO2_Button;
             main_graph = SPO2_Graph;
+            main_label = nil;
             [SPO2_Graph resize];
+            [main_label setFont:[main_label.font fontWithSize:128]];
         }
     }
     if(sender == PULSE_Button){
         if(main_view != PULSE){
+            [main_label setFont:[main_label.font fontWithSize:64]];
+            
             [main_view setFrame:PULSE.frame];
             [main_button setFrame:PULSE_Button.frame];
             [main_graph setFrame:PULSE.frame];
             [main_graph resize];
+            [main_label setFrame:CGRectMake(0, 0, PULSE.frame.size.width, PULSE.frame.size.height)];
             
             [PULSE setFrame:tempFrame];
             [PULSE_Button setFrame:tempButton];
+            [PULSE_Label setFrame:CGRectMake(0, 0, PULSE.frame.size.width, PULSE.frame.size.height)];
 
             main_view = PULSE;
             main_button = PULSE_Button;
+            main_label = PULSE_Label;
             main_graph = nil;
+            [main_label setFont:[main_label.font fontWithSize:128]];
         }
     }
     if(sender == TEMPERATURE_Button){
         if(main_view != TEMPERATURE){
+            [main_label setFont:[main_label.font fontWithSize:64]];
+            
             [main_view setFrame:TEMPERATURE.frame];
             [main_button setFrame:TEMPERATURE_Button.frame];
+            [main_label setFrame:CGRectMake(0, 0, TEMPERATURE.frame.size.width, TEMPERATURE.frame.size.height)];
             [main_graph setFrame:TEMPERATURE.frame];
             [main_graph resize];
             
             [TEMPERATURE setFrame:tempFrame];
             [TEMPERATURE_Button setFrame:tempButton];
+            [TEMPERATURE_Label setFrame:TEMPERATURE.frame];
             
             main_view = TEMPERATURE;
             main_button = TEMPERATURE_Button;
             main_graph = nil;
+            main_label = TEMPERATURE_Label;
+            [main_label setFont:[main_label.font fontWithSize:128]];
+        }
+    }
+    if(sender == BloodPressure_Button){
+        if(main_view != BloodPressure){
+            [main_label setFont:[main_label.font fontWithSize:64]];
+            
+            [main_view setFrame:BloodPressure.frame];
+            [main_button setFrame:BloodPressure_Button.frame];
+            [main_label setFrame:CGRectMake(0, 0, BloodPressure.frame.size.width, BloodPressure.frame.size.height)];
+            [main_graph setFrame:BloodPressure.frame];
+            [main_graph resize];
+            
+            [BloodPressure setFrame:tempFrame];
+            [BloodPressure_Button setFrame:tempButton];
+            [BloodPressure_Label setFrame:BloodPressure.frame];
+            
+            main_view = BloodPressure;
+            main_button = BloodPressure_Button;
+            main_graph = nil;
+            main_label = BloodPressure_Label;
+            [main_label setFont:[main_label.font fontWithSize:128]];
         }
     }
     if(sender == layout){
@@ -286,14 +438,19 @@
         if(layout_index == 0){
             NSLog(@"Switching to default view");
             main_view.frame = CGRectMake(main_view_x, main_view_y, main_view_width, main_view_height);
+            [layout setBackgroundImage:[UIImage imageNamed:@"expandicon.png"] forState:UIControlStateNormal];
+            
         }else if (layout_index == 1){
             main_view.frame = CGRectMake(main_view_x, main_view_y, window.frame.size.width, main_view_height);
+            [layout setBackgroundImage:[UIImage imageNamed:@"shrinkicon.png"] forState:UIControlStateNormal];
             NSLog(@"Switching to large view");
         }else if (layout_index == 2){
+            // UNUSED
             NSLog(@"Switching to quadrant view");
         }else{
             NSLog(@"ERROR");
         }
+        [main_label setFrame:CGRectMake(0, 0, main_view.frame.size.width, main_view.frame.size.height)];
         [self.view bringSubviewToFront:main_graph];
         
         [UIView beginAnimations:nil context:NULL];
@@ -307,36 +464,15 @@
         [main_graph resize];
     }
     
-
-    
     [self.view bringSubviewToFront:main_view];
     [self.view bringSubviewToFront:main_graph];
     [self.view bringSubviewToFront:main_button];
+    [self.view bringSubviewToFront:main_label];
     
     [self.view bringSubviewToFront:EKG_Button];
     [self.view bringSubviewToFront:SPO2_Button];
     [self.view bringSubviewToFront:PULSE_Button];
     [self.view bringSubviewToFront:TEMPERATURE_Button];
-}
-
--(void)checkHeat{
-   // if(self.instData >= 32.2){
-        if(isAlarmOn){
-            UIAlertView *tempAlert = [[UIAlertView alloc] initWithTitle:@"High Temperatrue"
-                                                                message:@"Your Temperature is above 90"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Thank You"
-                                                      otherButtonTitles:nil];
-            [tempAlert setTag:1];
-            alarmTimer = 0;
-            [tempAlert show];
-            [self playAlarm];
-            //myAlertView = tempAlert;
-        }
-        isAlarmOn = false;
- //   }else{
-//        isAlarmOn = true;
- //   }
 }
 
 -(void)loadSoundFiles{

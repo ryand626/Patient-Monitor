@@ -46,7 +46,7 @@
 {
     // Initialization code
     
-    NSString *filePathCSV = [[NSBundle mainBundle] pathForResource:@"DemoData" ofType:@"csv"];
+    NSString *filePathCSV = [[NSBundle mainBundle] pathForResource:@"EKG" ofType:@"csv"];
     
     [self readColumnFromCSV:filePathCSV AtColumn:1];
     

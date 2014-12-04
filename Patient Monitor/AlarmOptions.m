@@ -23,7 +23,6 @@
     isTemperatureOn = YES;
     isPulseOn = YES;
     isSPO2On = YES;
-    [self initializeData];
     [self makeAlarmWindow];
     [self addLabels];
     [self addToggles];
@@ -60,14 +59,6 @@
     edit_button_height = 20;
     edit_high_offset = 200;
     edit_low_offset = 600;
-    
-}
-
--(void)initializeData{
-    _bloodPressure = 900;
-    _temperature = 90;
-    _pulse = 30;
-    _spo2 = 89;
     
 }
 
@@ -133,25 +124,25 @@
     // High Bound Labels
     highBloodLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height/3, 0, 0)];
     
-    [highBloodLabel setText:@"High Blood Pressure: "];
+    [highBloodLabel setText:[@"High: " stringByAppendingString:[NSString stringWithFormat:@"%.f",highBloodPressure]]];
     [highBloodLabel setFont:[highBloodLabel.font fontWithSize:24]];
     [alarmScroll addSubview:highBloodLabel];
     [highBloodLabel sizeToFit];
     
     highTempLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*1.33, 0, 0)];
-    [highTempLabel setText:@"High Temperature: "];
+    [highTempLabel setText:[@"High: " stringByAppendingString:[NSString stringWithFormat:@"%.f",highTemperature]]];
     [highTempLabel setFont:[highTempLabel.font fontWithSize:24]];
     [alarmScroll addSubview:highTempLabel];
     [highTempLabel sizeToFit];
     
     highPulseLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*2.33, window_width, label_height)];
-    [highPulseLabel setText:@"High Pulse Rate:"];
+    [highPulseLabel setText:[@"High: " stringByAppendingString:[NSString stringWithFormat:@"%.f",highPulse]]];
     [highPulseLabel setFont:[highPulseLabel.font fontWithSize:24]];
     [alarmScroll addSubview:highPulseLabel];
     [highPulseLabel sizeToFit];
     
     highSpO2Label = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*3.33, window_width, label_height)];
-    [highSpO2Label setText:@"High SpO2: "];
+    [highSpO2Label setText:[@"High: " stringByAppendingString:[NSString stringWithFormat:@"%.f",highSPO2]]];
     [highSpO2Label setFont:[highSpO2Label.font fontWithSize:24]];
     [alarmScroll addSubview:highSpO2Label];
     [highSpO2Label sizeToFit];
@@ -159,25 +150,25 @@
     // Low Bound Labels
     lowBloodLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height/3, 0, 0)];
     
-    [lowBloodLabel setText:@"High Blood Pressure: "];
+    [lowBloodLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowBloodPressure]]];
     [lowBloodLabel setFont:[lowBloodLabel.font fontWithSize:24]];
     [alarmScroll addSubview:lowBloodLabel];
     [lowBloodLabel sizeToFit];
     
     lowTempLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*1.33, 0, 0)];
-    [lowTempLabel setText:@"High Temperature: "];
+    [lowTempLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowTemperature]]];
     [lowTempLabel setFont:[lowTempLabel.font fontWithSize:24]];
     [alarmScroll addSubview:lowTempLabel];
     [lowTempLabel sizeToFit];
     
     lowPulseLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*2.33, window_width, label_height)];
-    [lowPulseLabel setText:@"low Pulse Rate:"];
+    [lowPulseLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowPulse]]];
     [lowPulseLabel setFont:[lowPulseLabel.font fontWithSize:24]];
     [alarmScroll addSubview:lowPulseLabel];
     [lowPulseLabel sizeToFit];
     
     lowSpO2Label = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*3.33, window_width, label_height)];
-    [lowSpO2Label setText:@"low SpO2: "];
+    [lowSpO2Label setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowSPO2]]];
     [lowSpO2Label setFont:[lowSpO2Label.font fontWithSize:24]];
     [alarmScroll addSubview:lowSpO2Label];
     [lowSpO2Label sizeToFit];
@@ -186,44 +177,44 @@
 -(void)addButtons{
     editHighBloodPressure = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*.5, edit_button_width, edit_button_height)];
     [editHighBloodPressure addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [editHighBloodPressure setBackgroundColor:[UIColor greenColor]];
+    [editHighBloodPressure setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editHighBloodPressure];
     
     editHighTemperature = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*1.5, edit_button_width, edit_button_height)];
     [editHighTemperature addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [editHighTemperature setBackgroundColor:[UIColor greenColor]];
+    [editHighTemperature setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editHighTemperature];
     
     editHighPulse = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*2.5, edit_button_width, edit_button_height)];
     [editHighPulse addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [editHighPulse setBackgroundColor:[UIColor greenColor]];
+    [editHighPulse setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editHighPulse];
     
     editHighSPO2 = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*3.5, edit_button_width, edit_button_height)];
     [editHighSPO2 addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [editHighSPO2 setBackgroundColor:[UIColor greenColor]];
+    [editHighSPO2 setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editHighSPO2];
     
     //Low
     
     editLowBloodPressure = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*.5, edit_button_width, edit_button_height)];
     [editLowBloodPressure addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [editLowBloodPressure setBackgroundColor:[UIColor blueColor]];
+    [editLowBloodPressure setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editLowBloodPressure];
     
     editLowTemperature = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*1.5, edit_button_width, edit_button_height)];
     [editLowTemperature addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [editLowTemperature setBackgroundColor:[UIColor blueColor]];
+    [editLowTemperature setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editLowTemperature];
     
     editLowPulse = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*2.5, edit_button_width, edit_button_height)];
     [editLowPulse addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [editLowPulse setBackgroundColor:[UIColor blueColor]];
+    [editLowPulse setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editLowPulse];
     
     editLowSPO2 = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*3.5, edit_button_width, edit_button_height)];
     [editLowSPO2 addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [editLowSPO2 setBackgroundColor:[UIColor blueColor]];
+    [editLowSPO2 setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editLowSPO2];
 }
 
@@ -312,27 +303,28 @@
     if(alertView.tag == 5){
         lowBloodPressure = [[[alertView textFieldAtIndex:0]text] floatValue];;
         
-        [lowBloodLabel setText:[@"low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowBloodPressure]]];
+        [lowBloodLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowBloodPressure]]];
     }
     if(alertView.tag == 6){
         lowPulse = [[[alertView textFieldAtIndex:0]text] floatValue];;
         
-        [lowPulseLabel setText:[@"low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowPulse]]];
+        [lowPulseLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowPulse]]];
     }
     if(alertView.tag == 7){
         lowTemperature = [[[alertView textFieldAtIndex:0]text] floatValue];;
         
-        [lowTempLabel setText:[@"low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowTemperature]]];
+        [lowTempLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowTemperature]]];
     }
     if(alertView.tag == 8){
         lowSPO2 = [[[alertView textFieldAtIndex:0]text] floatValue];;
         
-        [lowSpO2Label setText:[@"low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowSPO2]]];
+        [lowSpO2Label setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowSPO2]]];
     }
     if(alertView.tag == 9){
         if(buttonIndex == 0){
             isBloodPressureOn = false;
             [BloodPressureToggle setOn:isBloodPressureOn];
+            isAlarmShowing = false;
         }else{
             UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -347,8 +339,9 @@
     // Changes from alerts
     if(alertView.tag == 10){
         if(buttonIndex == 0){
-            isTemperatureOn = false;
-            [TemperatureToggle setOn:TemperatureToggle];
+            isBloodPressureOn = false;
+            [BloodPressureToggle setOn:isBloodPressureOn];
+            isAlarmShowing = false;
         }else{
             UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
             alert.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -360,22 +353,94 @@
         }
     }
     if(alertView.tag == 11){
-        
+        if(buttonIndex == 0){
+            isTemperatureOn = false;
+            [TemperatureToggle setOn:isTemperatureOn];
+            isAlarmShowing = false;
+        }else{
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            UITextField * alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+            alertTextField.placeholder = @"Enter new value";
+            [alert setTag:3];
+            [alert show];
+        }
     }
     if(alertView.tag == 12){
-        
+        if(buttonIndex == 0){
+            isTemperatureOn = false;
+            [TemperatureToggle setOn:isTemperatureOn];
+            isAlarmShowing = false;
+        }else{
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            UITextField * alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+            alertTextField.placeholder = @"Enter new value";
+            [alert setTag:4];
+            [alert show];
+        }
     }
     if(alertView.tag == 13){
-        
+        if(buttonIndex == 0){
+            isPulseOn = false;
+            [PulseToggle setOn:isPulseOn];
+            isAlarmShowing = false;
+        }else{
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            UITextField * alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+            alertTextField.placeholder = @"Enter new value";
+            [alert setTag:5];
+            [alert show];
+        }
     }
     if(alertView.tag == 14){
-        
+        if(buttonIndex == 0){
+            isPulseOn = false;
+            [PulseToggle setOn:isPulseOn];
+            isAlarmShowing = false;
+        }else{
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            UITextField * alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+            alertTextField.placeholder = @"Enter new value";
+            [alert setTag:6];
+            [alert show];
+        }
     }
     if(alertView.tag == 15){
-        
+        if(buttonIndex == 0){
+            isSPO2On = false;
+            [SPO2Toggle setOn:isSPO2On];
+            isAlarmShowing = false;
+        }else{
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            UITextField * alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+            alertTextField.placeholder = @"Enter new value";
+            [alert setTag:7];
+            [alert show];
+        }
     }
     if(alertView.tag == 16){
-        
+        if(buttonIndex == 0){
+            isSPO2On = false;
+            [SPO2Toggle setOn:isSPO2On];
+            isAlarmShowing = false;
+        }else{
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Change Alarm Threshold" message:@"Please enter a new threshold:" delegate:self cancelButtonTitle:@"Update" otherButtonTitles:nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            UITextField * alertTextField = [alert textFieldAtIndex:0];
+            alertTextField.keyboardType = UIKeyboardTypeNumberPad;
+            alertTextField.placeholder = @"Enter new value";
+            [alert setTag:8];
+            [alert show];
+        }
     }
     
     if(alertView.tag < 9){
@@ -389,7 +454,7 @@
         isBloodPressureOn = !isBloodPressureOn;
     }
     if(sender == TemperatureToggle){
-        isTemperatureOn = ! isTemperatureOn;
+        isTemperatureOn = !isTemperatureOn;
     }
     if(sender == PulseToggle){
         isPulseOn = !isPulseOn;
@@ -427,25 +492,72 @@
 }
 
 - (void)checkThresholds:(NSTimer *)timer{
-   NSLog([NSString stringWithFormat:@"%f", _bloodPressure]);
-    NSLog([NSString stringWithFormat:@"%f", _temperature]);
-    NSLog([NSString stringWithFormat:@"%f", _pulse]);
-    NSLog([NSString stringWithFormat:@"%f", _spo2]);
+//   NSLog([NSString stringWithFormat:@"%f", _bloodPressure]);
+//    NSLog([NSString stringWithFormat:@"%f", _temperature]);
+//    NSLog([NSString stringWithFormat:@"%f", _pulse]);
+//    NSLog([NSString stringWithFormat:@"%f", _spo2]);
    // NSLog(self.temperature);
 
     NSLog(@"checking");
     if(isAlarmShowing){
+        NSLog(@"alarm is showing");
         return;
     }
-    
-    if(_bloodPressure > highBloodPressure){
-        isAlarmShowing = YES;
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"High Temperature" message:@"Temperature exceeded threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
-        [alert setTag:9];
-        [alert show];
+    if(isBloodPressureOn){
+        if(_bloodPressure > highBloodPressure){
+            isAlarmShowing = YES;
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"High Blood Pressure" message:@"Blood pressure exceeded threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
+            [alert setTag:9];
+            [alert show];
+        }
+        if(_bloodPressure < lowBloodPressure){
+            isAlarmShowing = YES;
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Low Blood Pressure" message:@"Blood pressure below threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
+            [alert setTag:10];
+            [alert show];
+        }
     }
-    if(_bloodPressure < lowBloodPressure){
-        isAlarmShowing = YES;
+    if(isTemperatureOn){
+        if(_temperature > highTemperature){
+            isAlarmShowing = YES;
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"High Temperature" message:@"Temperature exceeded threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
+            [alert setTag:11];
+            [alert show];
+        }
+        if(_temperature < lowTemperature){
+            isAlarmShowing = YES;
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Low Temperature" message:@"Temperature below threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
+            [alert setTag:12];
+            [alert show];
+        }
+    }
+    if(isPulseOn){
+        if(_pulse > highPulse){
+            isAlarmShowing = YES;
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"High Heart Rate" message:@"Heart rate exceeded threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
+            [alert setTag:13];
+            [alert show];
+        }
+        if(_pulse < lowPulse){
+            isAlarmShowing = YES;
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Low Heart Rate" message:@"Heart rate below threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
+            [alert setTag:14];
+            [alert show];
+        }
+    }
+    if(isSPO2On){
+        if(_spo2 > highSPO2){
+            isAlarmShowing = YES;
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"High SpO2" message:@"SpO2 exceeded threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
+            [alert setTag:15];
+            [alert show];
+        }
+        if(_spo2 < lowSPO2){
+            isAlarmShowing = YES;
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Low SpO2" message:@"SpO2 below threshold" delegate:self cancelButtonTitle:@"Disable" otherButtonTitles:@"Change",nil];
+            [alert setTag:16];
+            [alert show];
+        }
     }
 }
 
