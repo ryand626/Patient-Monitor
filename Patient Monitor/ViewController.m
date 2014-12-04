@@ -224,7 +224,7 @@
     
     EKG = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     
-    EKG_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
+    EKG_Button = [[UIButton alloc]initWithFrame:CGRectMake(0, y+20, button_width, button_height)];
     [EKG_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [EKG_Button setBackgroundImage:[UIImage imageNamed:@"ekgicon.png" ] forState:UIControlStateNormal];
 
@@ -247,7 +247,7 @@
     [SPO2_Label setFont:[SPO2_Label.font fontWithSize:50]];
    // [self.view addSubview:SPO2_Label];
     
-    SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
+    SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y+20, button_width, button_height)];
     [SPO2_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [SPO2_Button setBackgroundImage:[UIImage imageNamed:@"SpO2icon.png"] forState:UIControlStateNormal];
 }
@@ -283,7 +283,7 @@
     [TEMPERATURE setBackgroundColor:[UIColor blackColor]];
     
     TEMPERATURE_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, TEMPERATURE.frame.size.width, TEMPERATURE.frame.size.height)];
-    [TEMPERATURE_Label setText:[NSString stringWithFormat:@"%.f",temperature]];
+    [TEMPERATURE_Label setText:@"--"];
     [TEMPERATURE_Label setTextAlignment:NSTextAlignmentCenter];
     [TEMPERATURE_Label setTextColor:[UIColor redColor]];
     [TEMPERATURE_Label setFont:[TEMPERATURE_Label.font fontWithSize:50]];
@@ -353,7 +353,7 @@
             
             [main_view setFrame:SPO2.frame];
             [main_button setFrame:SPO2_Button.frame];
-            [main_label setFrame:SPO2.frame];
+            [main_label setFrame:CGRectMake(0, 0, SPO2.frame.size.width, SPO2.frame.size.height)];
             [main_graph setFrame:SPO2.frame];
             [main_graph resize];
             
