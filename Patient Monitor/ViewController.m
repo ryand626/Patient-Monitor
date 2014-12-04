@@ -36,7 +36,7 @@
     [alarm initializeAlarms];
 
     // COMMUNICATION STUFFF
-    self.myURL = @"http://10.3.13.158";
+  //  self.myURL = @"http://10.3.13.158";
    // [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(serverRequest:) userInfo:nil repeats:YES];
 }
 
@@ -369,7 +369,7 @@
             main_label = nil;
             [SPO2_Graph resize];
             [main_label setFont:[main_label.font fontWithSize:128]];
-            [self.view bringSubviewToFront:SPO2_Label];
+       //     [self.view bringSubviewToFront:SPO2_Label];
         }
     }
     if(sender == PULSE_Button){

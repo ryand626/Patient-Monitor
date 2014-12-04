@@ -278,7 +278,7 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"Entered: %@",[[alertView textFieldAtIndex:0] text]);
+
     // Changes from menu
     if(alertView.tag == 1){
         highBloodPressure = [[[alertView textFieldAtIndex:0]text] floatValue];
