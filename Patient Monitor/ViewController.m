@@ -34,11 +34,10 @@
     [alarm setButton:alarmOptions];
     [alarm setMainView:self.view window:window];
     [alarm initializeAlarms];
-    [SPO2 bringSubviewToFront:SPO2_Label];
-    
+
     // COMMUNICATION STUFFF
     self.myURL = @"http://10.3.13.158";
-    //[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(serverRequest:) userInfo:nil repeats:YES];
+   // [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(serverRequest:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -241,12 +240,12 @@
     
     SPO2 = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
     
-    SPO2_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SPO2.frame.size.width, SPO2.frame.size.height)];
+    SPO2_Label = [[UILabel alloc]initWithFrame:CGRectMake(x, y+SPO2.frame.size.height/2, SPO2.frame.size.width, SPO2.frame.size.height/2)];
     [SPO2_Label setText:[NSString stringWithFormat:@"%.f",spo2]];
     [SPO2_Label setTextAlignment:NSTextAlignmentRight];
     [SPO2_Label setTextColor:[UIColor blueColor]];
     [SPO2_Label setFont:[SPO2_Label.font fontWithSize:64]];
-    [SPO2 addSubview:SPO2_Label];
+   // [self.view addSubview:SPO2_Label];
     
     SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
     [SPO2_Button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -354,13 +353,15 @@
             
             [main_view setFrame:SPO2.frame];
             [main_button setFrame:SPO2_Button.frame];
-            [main_label setFrame:CGRectMake(0, 0, SPO2.frame.size.width, SPO2.frame.size.height)];
+            [main_label setFrame:SPO2.frame];
             [main_graph setFrame:SPO2.frame];
             [main_graph resize];
             
             [SPO2 setFrame:tempFrame];
             [SPO2_Button setFrame:tempButton];
+           
             [SPO2_Graph setFrame:SPO2.frame];
+         //   [SPO2_Label setFrame:SPO2.frame];
 
             main_view = SPO2;
             main_button = SPO2_Button;
@@ -368,6 +369,7 @@
             main_label = nil;
             [SPO2_Graph resize];
             [main_label setFont:[main_label.font fontWithSize:128]];
+            [self.view bringSubviewToFront:SPO2_Label];
         }
     }
     if(sender == PULSE_Button){
@@ -451,6 +453,9 @@
             NSLog(@"ERROR");
         }
         [main_label setFrame:CGRectMake(0, 0, main_view.frame.size.width, main_view.frame.size.height)];
+//        if(main_label == SPO2_Label){
+//            [main_label setFrame:CGRectMake(SPO2.frame.origin.x, SPO2.frame.origin.y, main_view.frame.size.width, main_view.frame.size.height)];
+//        }
         [self.view bringSubviewToFront:main_graph];
         
         [UIView beginAnimations:nil context:NULL];
@@ -473,6 +478,7 @@
     [self.view bringSubviewToFront:SPO2_Button];
     [self.view bringSubviewToFront:PULSE_Button];
     [self.view bringSubviewToFront:TEMPERATURE_Button];
+    [self.view bringSubviewToFront:BloodPressure_Button];
 }
 
 -(void)loadSoundFiles{
@@ -557,11 +563,10 @@
         NSArray *arduinoData = jsonPackage[@"packet"];
         
         NSLog(@"%@", jsonPackage);
+        float tempTemp =[self convert:[[arduinoData valueForKey:@"last_reading"] floatValue]];
+        NSLog([NSString stringWithFormat:@"%.f",tempTemp]);
         
-        alarm.temperature = [self convert:[[arduinoData valueForKey:@"last_reading"] floatValue]];
-        alarm.bloodPressure = [self convert:[[arduinoData valueForKey:@"s_avg"] floatValue]];
-        alarm.pulse = [self convert:[[arduinoData valueForKey:@"tens_avg"] floatValue]];
-        
+        //alarm.temperature =98;
     }else{
         NSLog(@"ERROR OBTAINING RESULTS, CHECK URL");
     }
