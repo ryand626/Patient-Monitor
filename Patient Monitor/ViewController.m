@@ -55,15 +55,16 @@
     // Number of breaks in the main view
     number_of_main_view_breaks = 0;
     // Buttons
-    button_width = 75;
-    button_height = 75;
+    button_width = 50;
+    button_height = 50;
     
     // Get window data
-    if([[UIScreen mainScreen] bounds].size.width>[[UIScreen mainScreen] bounds].size.width){
+    // NOTE: UNCOMMENT THIS IF YOU ARE RUNNING ON ACTUAL HARDWARE
+  //  if([[UIScreen mainScreen] bounds].size.width>[[UIScreen mainScreen] bounds].size.width){
         window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    }else{
-        window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width)];
-    }
+//    }else{
+//        window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width)];
+//    }
     
     // Set Main View Bounds
     main_view_x = 0;
@@ -313,7 +314,7 @@
     BloodPressure_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, BloodPressure.frame.size.width, BloodPressure.frame.size.height)];
     [BloodPressure_Label setText:[[[NSString stringWithFormat:@"%.f",systolic] stringByAppendingString:@"/"]stringByAppendingString:[NSString stringWithFormat:@"%.fmmHg",diastolic]]];
     [BloodPressure_Label setTextAlignment:NSTextAlignmentCenter];
-    [BloodPressure_Label setTextColor:[UIColor purpleColor]];
+    [BloodPressure_Label setTextColor:[UIColor greenColor]];
     [BloodPressure_Label setFont:[BloodPressure_Label.font fontWithSize:50]];
     [BloodPressure addSubview:BloodPressure_Label];
     
@@ -326,6 +327,10 @@
 // TODO: Make this better by using the number of children of the view in a for loop to condense the code
 -(void) buttonClicked:(UIButton*)sender
 {
+    if(alarm.isAlarmWindowUp){
+        NSLog(@"the window is up");
+        return;
+    }
     CGRect tempFrame = main_view.frame;
     //Graph *tempGraph = main_graph;
     CGRect tempButton = main_button.frame;

@@ -31,6 +31,7 @@
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkThresholds:) userInfo:nil repeats:YES];
     
     alarmOptionsWindow.frame = CGRectMake(window.frame.size.width/2-window_width/2,window.frame.size.height,alarmOptionsWindow.frame.size.width,alarmOptionsWindow.frame.size.height);
+    self.isAlarmWindowUp = isAlarmShowing;
 }
 
 -(void)initializeDimentions{
@@ -59,8 +60,8 @@
     
     edit_button_width = 20;
     edit_button_height = 20;
-    edit_high_offset = 200;
-    edit_low_offset = 600;
+    edit_high_offset = 180;
+    edit_low_offset = 570;
     
 }
 
@@ -76,14 +77,15 @@
     // Change settings of menu bar
     [alarmText setTextAlignment:NSTextAlignmentCenter];
     [alarmText setText:@"Alarm Settings"];
-    [alarmText setBackgroundColor:[UIColor lightGrayColor]];
-    [alarmText setFont:[alarmText.font fontWithSize:32]];
+    [alarmText setBackgroundColor:[UIColor colorWithRed:20/255.0 green:120/255.0 blue:200/255.0 alpha:1]];
+    [alarmText setFont:[alarmText.font fontWithSize:64]];
+    [alarmText setTextColor:[UIColor whiteColor]];
     // Add menu bar to view
     [alarmOptionsWindow addSubview:alarmText];
     
     // Create List Scrollable options List
     alarmScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, frame_height, window_width, window_height-frame_height)];
-    alarmScroll.contentSize=CGSizeMake(alarmScroll.frame.size.width,800);
+    alarmScroll.contentSize=CGSizeMake(alarmScroll.frame.size.width,600);
    // [alarmScroll setBackgroundColor:[UIColor clearColor]];
     [alarmOptionsWindow addSubview:alarmScroll];
     
@@ -97,79 +99,89 @@
 }
 
 -(void)addLabels{
+    UIColor *bannerColor =[UIColor colorWithRed:220/255.0 green:220/255.0 blue:250/255.0 alpha:1];
     // Section Labels
     BloodPressureLabel = [[UILabel alloc]initWithFrame:CGRectMake(margin, 0, 0, 0)];
     
-    [BloodPressureLabel setText:@"Blood Pressure"];
+    [BloodPressureLabel setText:@" Blood Pressure"];
     [BloodPressureLabel setFont:[BloodPressureLabel.font fontWithSize:30]];
     [alarmScroll addSubview:BloodPressureLabel];
     [BloodPressureLabel sizeToFit];
+    [BloodPressureLabel setFrame:CGRectMake(0, BloodPressureLabel.frame.origin.y, window_width, BloodPressureLabel.frame.size.height)];
+    [BloodPressureLabel setBackgroundColor:bannerColor];
+    
     
     TemperatureLabel = [[UILabel alloc]initWithFrame:CGRectMake(margin, frame_height, 0, 0)];
-    [TemperatureLabel setText:@"Temperature"];
+    [TemperatureLabel setText:@" Temperature"];
     [TemperatureLabel setFont:[TemperatureLabel.font fontWithSize:30]];
     [alarmScroll addSubview:TemperatureLabel];
     [TemperatureLabel sizeToFit];
+    [TemperatureLabel setFrame:CGRectMake(0, TemperatureLabel.frame.origin.y, window_width, TemperatureLabel.frame.size.height)];
+    [TemperatureLabel setBackgroundColor:bannerColor];
     
     PulseLabel = [[UILabel alloc]initWithFrame:CGRectMake(margin, frame_height*2, window_width, label_height)];
-    [PulseLabel setText:@"Pulse"];
+    [PulseLabel setText:@" Pulse"];
     [PulseLabel setFont:[PulseLabel.font fontWithSize:30]];
     [alarmScroll addSubview:PulseLabel];
     [PulseLabel sizeToFit];
+    [PulseLabel setFrame:CGRectMake(0, PulseLabel.frame.origin.y, window_width, PulseLabel.frame.size.height)];
+    [PulseLabel setBackgroundColor:bannerColor];
     
     SpO2Label = [[UILabel alloc]initWithFrame:CGRectMake(margin, frame_height*3, window_width, label_height)];
-    [SpO2Label setText:@"SpO2"];
+    [SpO2Label setText:@" SpO2"];
     [SpO2Label setFont:[SpO2Label.font fontWithSize:30]];
     [alarmScroll addSubview:SpO2Label];
     [SpO2Label sizeToFit];
+    [SpO2Label setFrame:CGRectMake(0, SpO2Label.frame.origin.y, window_width, SpO2Label.frame.size.height)];
+    [SpO2Label setBackgroundColor:bannerColor];
     
     // High Bound Labels
-    highBloodLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height/3, 0, 0)];
+    highBloodLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height/2-label_height/2, 0, 0)];
     
     [highBloodLabel setText:[@"High: " stringByAppendingString:[NSString stringWithFormat:@"%.f",highBloodPressure]]];
     [highBloodLabel setFont:[highBloodLabel.font fontWithSize:24]];
     [alarmScroll addSubview:highBloodLabel];
     [highBloodLabel sizeToFit];
     
-    highTempLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*1.33, 0, 0)];
+    highTempLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*1.5-label_height/2, 0, 0)];
     [highTempLabel setText:[@"High: " stringByAppendingString:[NSString stringWithFormat:@"%.f",highTemperature]]];
     [highTempLabel setFont:[highTempLabel.font fontWithSize:24]];
     [alarmScroll addSubview:highTempLabel];
     [highTempLabel sizeToFit];
     
-    highPulseLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*2.33, window_width, label_height)];
+    highPulseLabel = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*2.5-label_height/2, window_width, label_height)];
     [highPulseLabel setText:[@"High: " stringByAppendingString:[NSString stringWithFormat:@"%.f",highPulse]]];
     [highPulseLabel setFont:[highPulseLabel.font fontWithSize:24]];
     [alarmScroll addSubview:highPulseLabel];
     [highPulseLabel sizeToFit];
     
-    highSpO2Label = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*3.33, window_width, label_height)];
+    highSpO2Label = [[UILabel alloc]initWithFrame:CGRectMake(high_label_offset, frame_height*3.5-label_height/2, window_width, label_height)];
     [highSpO2Label setText:[@"High: " stringByAppendingString:[NSString stringWithFormat:@"%.f",highSPO2]]];
     [highSpO2Label setFont:[highSpO2Label.font fontWithSize:24]];
     [alarmScroll addSubview:highSpO2Label];
     [highSpO2Label sizeToFit];
     
     // Low Bound Labels
-    lowBloodLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height/3, 0, 0)];
+    lowBloodLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height/2-label_height/2, 0, 0)];
     
     [lowBloodLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowBloodPressure]]];
     [lowBloodLabel setFont:[lowBloodLabel.font fontWithSize:24]];
     [alarmScroll addSubview:lowBloodLabel];
     [lowBloodLabel sizeToFit];
     
-    lowTempLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*1.33, 0, 0)];
+    lowTempLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*1.5-label_height/2, 0, 0)];
     [lowTempLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowTemperature]]];
     [lowTempLabel setFont:[lowTempLabel.font fontWithSize:24]];
     [alarmScroll addSubview:lowTempLabel];
     [lowTempLabel sizeToFit];
     
-    lowPulseLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*2.33, window_width, label_height)];
+    lowPulseLabel = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*2.5-label_height/2, window_width, label_height)];
     [lowPulseLabel setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowPulse]]];
     [lowPulseLabel setFont:[lowPulseLabel.font fontWithSize:24]];
     [alarmScroll addSubview:lowPulseLabel];
     [lowPulseLabel sizeToFit];
     
-    lowSpO2Label = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*3.33, window_width, label_height)];
+    lowSpO2Label = [[UILabel alloc]initWithFrame:CGRectMake(low_label_offset, frame_height*3.5-label_height/2, window_width, label_height)];
     [lowSpO2Label setText:[@"Low: " stringByAppendingString:[NSString stringWithFormat:@"%.f",lowSPO2]]];
     [lowSpO2Label setFont:[lowSpO2Label.font fontWithSize:24]];
     [alarmScroll addSubview:lowSpO2Label];
@@ -177,44 +189,44 @@
 }
 
 -(void)addButtons{
-    editHighBloodPressure = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*.5, edit_button_width, edit_button_height)];
+    editHighBloodPressure = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*.5-edit_button_height/2, edit_button_width, edit_button_height)];
     [editHighBloodPressure addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
     [editHighBloodPressure setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editHighBloodPressure];
     
-    editHighTemperature = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*1.5, edit_button_width, edit_button_height)];
+    editHighTemperature = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*1.5-edit_button_height/2, edit_button_width, edit_button_height)];
     [editHighTemperature addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
     [editHighTemperature setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editHighTemperature];
     
-    editHighPulse = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*2.5, edit_button_width, edit_button_height)];
+    editHighPulse = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*2.5-edit_button_height/2, edit_button_width, edit_button_height)];
     [editHighPulse addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
     [editHighPulse setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editHighPulse];
     
-    editHighSPO2 = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*3.5, edit_button_width, edit_button_height)];
+    editHighSPO2 = [[UIButton alloc]initWithFrame:CGRectMake(edit_high_offset, frame_height*3.5-edit_button_height/2, edit_button_width, edit_button_height)];
     [editHighSPO2 addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
     [editHighSPO2 setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editHighSPO2];
     
     //Low
     
-    editLowBloodPressure = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*.5, edit_button_width, edit_button_height)];
+    editLowBloodPressure = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*.5-edit_button_height/2, edit_button_width, edit_button_height)];
     [editLowBloodPressure addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
     [editLowBloodPressure setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editLowBloodPressure];
     
-    editLowTemperature = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*1.5, edit_button_width, edit_button_height)];
+    editLowTemperature = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*1.5-edit_button_height/2, edit_button_width, edit_button_height)];
     [editLowTemperature addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
     [editLowTemperature setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editLowTemperature];
     
-    editLowPulse = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*2.5, edit_button_width, edit_button_height)];
+    editLowPulse = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*2.5-edit_button_height/2, edit_button_width, edit_button_height)];
     [editLowPulse addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
     [editLowPulse setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editLowPulse];
     
-    editLowSPO2 = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*3.5, edit_button_width, edit_button_height)];
+    editLowSPO2 = [[UIButton alloc]initWithFrame:CGRectMake(edit_low_offset, frame_height*3.5-edit_button_height/2, edit_button_width, edit_button_height)];
     [editLowSPO2 addTarget:self action:@selector(EditClicked:) forControlEvents:UIControlEventTouchUpInside];
     [editLowSPO2 setBackgroundImage:[UIImage imageNamed:@"editicon.png"] forState:UIControlStateNormal];
     [alarmScroll addSubview:editLowSPO2];
@@ -491,6 +503,7 @@
         
     }
     isWindowUp = !isWindowUp;
+    self.isAlarmWindowUp = isWindowUp;
 }
 
 - (void)checkThresholds:(NSTimer *)timer{
@@ -561,6 +574,8 @@
             [alert show];
         }
     }
+
+
 }
 
 - (void) loadSoundFiles{

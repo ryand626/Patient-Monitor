@@ -109,6 +109,7 @@
 @property (assign) float temperature;
 @property (assign) float pulse;
 @property (assign) float spo2;
+@property (assign) bool isAlarmWindowUp;
 
 - (void) initializeAlarms;
 - (void) setMainView:(UIView*)view window:(UIWindow*)screen;

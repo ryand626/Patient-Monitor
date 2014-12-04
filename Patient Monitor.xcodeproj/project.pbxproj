@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		940BDFB91A2FE77400BF84FC /* Spo2graphdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = 940BDFB81A2FE77400BF84FC /* Spo2graphdata.csv */; };
 		940BDFBF1A2FF4BF00BF84FC /* EKG.csv in Resources */ = {isa = PBXBuildFile; fileRef = 940BDFBE1A2FF4BF00BF84FC /* EKG.csv */; };
+		940BDFC51A30BA8F00BF84FC /* expandicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 940BDFC41A30BA8F00BF84FC /* expandicon.png */; };
+		940BDFC71A30BA9900BF84FC /* shrinkicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 940BDFC61A30BA9900BF84FC /* shrinkicon.png */; };
 		941679FE1A0AED2700861407 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 941679FD1A0AED2700861407 /* main.m */; };
 		94167A011A0AED2700861407 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94167A001A0AED2700861407 /* AppDelegate.m */; };
 		94167A041A0AED2700861407 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94167A031A0AED2700861407 /* ViewController.m */; };
@@ -22,11 +24,9 @@
 		9429C16B1A2F5FDF001291D4 /* alarmonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C16A1A2F5FDF001291D4 /* alarmonIcon.png */; };
 		9429C1701A2F5FF7001291D4 /* bloodpressicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C16F1A2F5FF7001291D4 /* bloodpressicon.png */; };
 		9429C1721A2F6014001291D4 /* editicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C1711A2F6014001291D4 /* editicon.png */; };
-		9429C1741A2F6026001291D4 /* expandicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C1731A2F6026001291D4 /* expandicon.png */; };
 		9429C1761A2F6040001291D4 /* faranheiticon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C1751A2F6040001291D4 /* faranheiticon.png */; };
 		9429C1781A2F604E001291D4 /* pulseicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C1771A2F604E001291D4 /* pulseicon.png */; };
 		9429C17A1A2F60A0001291D4 /* settingsicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C1791A2F60A0001291D4 /* settingsicon.png */; };
-		9429C17C1A2F60A8001291D4 /* shrinkicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C17B1A2F60A8001291D4 /* shrinkicon.png */; };
 		9429C17F1A2F60C1001291D4 /* SpO2icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C17D1A2F60C1001291D4 /* SpO2icon.png */; };
 		9429C1801A2F60C1001291D4 /* thermometericon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C17E1A2F60C1001291D4 /* thermometericon.png */; };
 		9429C1821A2F6265001291D4 /* ekgicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9429C1811A2F6265001291D4 /* ekgicon.png */; };
@@ -65,6 +65,8 @@
 		940BDFB81A2FE77400BF84FC /* Spo2graphdata.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Spo2graphdata.csv; sourceTree = "<group>"; };
 		940BDFBD1A2FF41100BF84FC /* DemoData.csv */ = {isa = PBXFileReference; lastKnownFileType = file; path = DemoData.csv; sourceTree = "<group>"; };
 		940BDFBE1A2FF4BF00BF84FC /* EKG.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EKG.csv; sourceTree = "<group>"; };
+		940BDFC41A30BA8F00BF84FC /* expandicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandicon.png; sourceTree = "<group>"; };
+		940BDFC61A30BA9900BF84FC /* shrinkicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shrinkicon.png; sourceTree = "<group>"; };
 		940D95701A1E4E1F00CEA9DE /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = "../../../../../../Downloads/core-plot-master/framework/CorePlot.xcodeproj"; sourceTree = "<group>"; };
 		941679F81A0AED2700861407 /* Patient Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Patient Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		941679FC1A0AED2700861407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,11 +89,9 @@
 		9429C16A1A2F5FDF001291D4 /* alarmonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarmonIcon.png; sourceTree = "<group>"; };
 		9429C16F1A2F5FF7001291D4 /* bloodpressicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bloodpressicon.png; sourceTree = "<group>"; };
 		9429C1711A2F6014001291D4 /* editicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editicon.png; sourceTree = "<group>"; };
-		9429C1731A2F6026001291D4 /* expandicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandicon.png; sourceTree = "<group>"; };
 		9429C1751A2F6040001291D4 /* faranheiticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faranheiticon.png; sourceTree = "<group>"; };
 		9429C1771A2F604E001291D4 /* pulseicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pulseicon.png; sourceTree = "<group>"; };
 		9429C1791A2F60A0001291D4 /* settingsicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsicon.png; sourceTree = "<group>"; };
-		9429C17B1A2F60A8001291D4 /* shrinkicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shrinkicon.png; sourceTree = "<group>"; };
 		9429C17D1A2F60C1001291D4 /* SpO2icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpO2icon.png; sourceTree = "<group>"; };
 		9429C17E1A2F60C1001291D4 /* thermometericon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermometericon.png; sourceTree = "<group>"; };
 		9429C1811A2F6265001291D4 /* ekgicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ekgicon.png; sourceTree = "<group>"; };
@@ -182,15 +182,15 @@
 				9429C1711A2F6014001291D4 /* editicon.png */,
 				9429C16F1A2F5FF7001291D4 /* bloodpressicon.png */,
 				9429C1751A2F6040001291D4 /* faranheiticon.png */,
-				9429C1731A2F6026001291D4 /* expandicon.png */,
+				940BDFC41A30BA8F00BF84FC /* expandicon.png */,
 				9429C16A1A2F5FDF001291D4 /* alarmonIcon.png */,
 				9429C1791A2F60A0001291D4 /* settingsicon.png */,
+				940BDFC61A30BA9900BF84FC /* shrinkicon.png */,
 				945D31531A0BD87F009712FC /* black.jpg */,
 				9429C1771A2F604E001291D4 /* pulseicon.png */,
 				9429C1811A2F6265001291D4 /* ekgicon.png */,
 				9429C17D1A2F60C1001291D4 /* SpO2icon.png */,
 				9429C17E1A2F60C1001291D4 /* thermometericon.png */,
-				9429C17B1A2F60A8001291D4 /* shrinkicon.png */,
 				945D31511A0BD69E009712FC /* spo2.png */,
 				945D314F1A0BD253009712FC /* ekg.png */,
 				94167A211A0AF19C00861407 /* placeholder.jpg */,
@@ -322,16 +322,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9429C1701A2F5FF7001291D4 /* bloodpressicon.png in Resources */,
+				940BDFC51A30BA8F00BF84FC /* expandicon.png in Resources */,
 				9429C17A1A2F60A0001291D4 /* settingsicon.png in Resources */,
 				9429C17F1A2F60C1001291D4 /* SpO2icon.png in Resources */,
 				9429C16B1A2F5FDF001291D4 /* alarmonIcon.png in Resources */,
+				940BDFC71A30BA9900BF84FC /* shrinkicon.png in Resources */,
 				945D31501A0BD253009712FC /* ekg.png in Resources */,
 				945D31521A0BD69E009712FC /* spo2.png in Resources */,
-				9429C17C1A2F60A8001291D4 /* shrinkicon.png in Resources */,
 				9429C1761A2F6040001291D4 /* faranheiticon.png in Resources */,
 				94167A071A0AED2700861407 /* Main.storyboard in Resources */,
 				9429C1781A2F604E001291D4 /* pulseicon.png in Resources */,
-				9429C1741A2F6026001291D4 /* expandicon.png in Resources */,
 				94167A221A0AF19C00861407 /* placeholder.jpg in Resources */,
 				94167A0C1A0AED2700861407 /* LaunchScreen.xib in Resources */,
 				9429C1821A2F6265001291D4 /* ekgicon.png in Resources */,
