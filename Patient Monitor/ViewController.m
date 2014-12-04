@@ -36,8 +36,8 @@
     [alarm initializeAlarms];
 
     // COMMUNICATION STUFFF
-  //  self.myURL = @"http://10.3.13.158";
-   // [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(serverRequest:) userInfo:nil repeats:YES];
+    self.myURL = @"http://10.3.13.158";
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(serverRequest:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -560,13 +560,14 @@
         NSError *error;
         
         NSDictionary *jsonPackage = [NSJSONSerialization JSONObjectWithData:response options:kNilOptions error:&error];
-        NSArray *arduinoData = jsonPackage[@"packet"];
+       // NSArray *arduinoData = jsonPackage[@"packet"];
         
         NSLog(@"%@", jsonPackage);
-        float tempTemp =[self convert:[[arduinoData valueForKey:@"last_reading"] floatValue]];
-        NSLog([NSString stringWithFormat:@"%.f",tempTemp]);
+        float tempTemp =[self convert:[[jsonPackage valueForKey:@"s_avg"] floatValue]];
+        NSLog([NSString stringWithFormat:@"%f",tempTemp]);
         
-        //alarm.temperature =98;
+        alarm.temperature =tempTemp;
+        [TEMPERATURE_Label setText:[NSString stringWithFormat:@"%.f",tempTemp]];
     }else{
         NSLog(@"ERROR OBTAINING RESULTS, CHECK URL");
     }
