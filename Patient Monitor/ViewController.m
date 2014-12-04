@@ -244,7 +244,7 @@
     [SPO2_Label setText:[NSString stringWithFormat:@"%.f",spo2]];
     [SPO2_Label setTextAlignment:NSTextAlignmentRight];
     [SPO2_Label setTextColor:[UIColor blueColor]];
-    [SPO2_Label setFont:[SPO2_Label.font fontWithSize:64]];
+    [SPO2_Label setFont:[SPO2_Label.font fontWithSize:50]];
    // [self.view addSubview:SPO2_Label];
     
     SPO2_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
@@ -262,10 +262,10 @@
     [PULSE setBackgroundColor:[UIColor blackColor]];
     
     PULSE_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, PULSE.frame.size.width, PULSE.frame.size.height)];
-    [PULSE_Label setText:[NSString stringWithFormat:@"%.f",pulse]];
+    [PULSE_Label setText:[NSString stringWithFormat:@"%.f bpm",pulse]];
     [PULSE_Label setTextAlignment:NSTextAlignmentCenter];
     [PULSE_Label setTextColor:[UIColor magentaColor]];
-    [PULSE_Label setFont:[PULSE_Label.font fontWithSize:64]];
+    [PULSE_Label setFont:[PULSE_Label.font fontWithSize:50]];
     [PULSE addSubview:PULSE_Label];
     
     PULSE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
@@ -286,7 +286,7 @@
     [TEMPERATURE_Label setText:[NSString stringWithFormat:@"%.f",temperature]];
     [TEMPERATURE_Label setTextAlignment:NSTextAlignmentCenter];
     [TEMPERATURE_Label setTextColor:[UIColor redColor]];
-    [TEMPERATURE_Label setFont:[TEMPERATURE_Label.font fontWithSize:64]];
+    [TEMPERATURE_Label setFont:[TEMPERATURE_Label.font fontWithSize:50]];
     [TEMPERATURE addSubview:TEMPERATURE_Label];
     
     TEMPERATURE_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
@@ -304,10 +304,10 @@
     [BloodPressure setBackgroundColor:[UIColor blackColor]];
     
     BloodPressure_Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, BloodPressure.frame.size.width, BloodPressure.frame.size.height)];
-    [BloodPressure_Label setText:[[[NSString stringWithFormat:@"%.f",systolic] stringByAppendingString:@"/"]stringByAppendingString:[NSString stringWithFormat:@"%.f",diastolic]]];
+    [BloodPressure_Label setText:[[[NSString stringWithFormat:@"%.f",systolic] stringByAppendingString:@"/"]stringByAppendingString:[NSString stringWithFormat:@"%.fmmHg",diastolic]]];
     [BloodPressure_Label setTextAlignment:NSTextAlignmentCenter];
     [BloodPressure_Label setTextColor:[UIColor purpleColor]];
-    [BloodPressure_Label setFont:[BloodPressure_Label.font fontWithSize:64]];
+    [BloodPressure_Label setFont:[BloodPressure_Label.font fontWithSize:50]];
     [BloodPressure addSubview:BloodPressure_Label];
     
     BloodPressure_Button = [[UIButton alloc]initWithFrame:CGRectMake(x+width-button_width, y, button_width, button_height)];
@@ -326,7 +326,7 @@
     [self.view sendSubviewToBack: main_view];
     if(sender == EKG_Button){
         if(main_view != EKG){
-            [main_label setFont:[main_label.font fontWithSize:64]];
+            [main_label setFont:[main_label.font fontWithSize:50]];
             
             [main_view setFrame:EKG.frame];
             [main_button setFrame:EKG_Button.frame];
@@ -349,7 +349,7 @@
     }
     if(sender == SPO2_Button){
         if(main_view != SPO2){
-            [main_label setFont:[main_label.font fontWithSize:64]];
+            [main_label setFont:[main_label.font fontWithSize:50]];
             
             [main_view setFrame:SPO2.frame];
             [main_button setFrame:SPO2_Button.frame];
@@ -374,7 +374,7 @@
     }
     if(sender == PULSE_Button){
         if(main_view != PULSE){
-            [main_label setFont:[main_label.font fontWithSize:64]];
+            [main_label setFont:[main_label.font fontWithSize:50]];
             
             [main_view setFrame:PULSE.frame];
             [main_button setFrame:PULSE_Button.frame];
@@ -395,7 +395,7 @@
     }
     if(sender == TEMPERATURE_Button){
         if(main_view != TEMPERATURE){
-            [main_label setFont:[main_label.font fontWithSize:64]];
+            [main_label setFont:[main_label.font fontWithSize:50]];
             
             [main_view setFrame:TEMPERATURE.frame];
             [main_button setFrame:TEMPERATURE_Button.frame];
@@ -416,7 +416,7 @@
     }
     if(sender == BloodPressure_Button){
         if(main_view != BloodPressure){
-            [main_label setFont:[main_label.font fontWithSize:64]];
+            [main_label setFont:[main_label.font fontWithSize:50]];
             
             [main_view setFrame:BloodPressure.frame];
             [main_button setFrame:BloodPressure_Button.frame];
@@ -432,7 +432,7 @@
             main_button = BloodPressure_Button;
             main_graph = nil;
             main_label = BloodPressure_Label;
-            [main_label setFont:[main_label.font fontWithSize:128]];
+            [main_label setFont:[main_label.font fontWithSize:100]];
         }
     }
     if(sender == layout){
@@ -564,10 +564,10 @@
         
         NSLog(@"%@", jsonPackage);
         float tempTemp =[self convert:[[jsonPackage valueForKey:@"s_avg"] floatValue]];
-        NSLog([NSString stringWithFormat:@"%f",tempTemp]);
+        NSLog([NSString stringWithFormat:@"%f °C",tempTemp]);
         
         alarm.temperature =tempTemp;
-        [TEMPERATURE_Label setText:[NSString stringWithFormat:@"%.f",tempTemp]];
+        [TEMPERATURE_Label setText:[NSString stringWithFormat:@"%.f°C",tempTemp]];
     }else{
         NSLog(@"ERROR OBTAINING RESULTS, CHECK URL");
     }

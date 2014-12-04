@@ -348,7 +348,7 @@
             UITextField * alertTextField = [alert textFieldAtIndex:0];
             alertTextField.keyboardType = UIKeyboardTypeNumberPad;
             alertTextField.placeholder = @"Enter new value";
-            [alert setTag:2];
+            [alert setTag:5];
             [alert show];
         }
     }
@@ -378,7 +378,7 @@
             UITextField * alertTextField = [alert textFieldAtIndex:0];
             alertTextField.keyboardType = UIKeyboardTypeNumberPad;
             alertTextField.placeholder = @"Enter new value";
-            [alert setTag:4];
+            [alert setTag:7];
             [alert show];
         }
     }
@@ -393,7 +393,7 @@
             UITextField * alertTextField = [alert textFieldAtIndex:0];
             alertTextField.keyboardType = UIKeyboardTypeNumberPad;
             alertTextField.placeholder = @"Enter new value";
-            [alert setTag:5];
+            [alert setTag:2];
             [alert show];
         }
     }
@@ -423,7 +423,7 @@
             UITextField * alertTextField = [alert textFieldAtIndex:0];
             alertTextField.keyboardType = UIKeyboardTypeNumberPad;
             alertTextField.placeholder = @"Enter new value";
-            [alert setTag:7];
+            [alert setTag:4];
             [alert show];
         }
     }
